@@ -1,0 +1,27 @@
+# Node modules
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+
+# Playwright files
+playwright-report/
+test-results/
+trace.zip
+screenshots/
+videos/
+
+# VSCode
+.vscode/
+
+# Temporary files
+*.tmp
