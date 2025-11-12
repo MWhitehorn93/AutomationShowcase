@@ -9,12 +9,13 @@ test.beforeEach(async ({ page }) => {
     await homePage.visit();
 });
 
-test('Incorrect Log In Attempt', async ({ page }) => {
+test('Log in and Log out User', async ({ page }) => {
     const homePage = new HomePage(page);
     const loginPage = new LoginPage(page);
-   
+
     await homePage.homeLoginButton.click();
     await page.waitForURL(/\/login$/);
-    await loginPage.loginUser(testData.incorrectUser.email, testData.incorrectUser.password);
-    await expect(loginPage.loginErrorMessage).toBeVisible();
+    await loginPage.loginUser(testData.loginUser.email, testData.loginUser.password);
+    await expect(homePage.testUserLoggedInMessage).toBeVisible();
+    await homePage.homeLogOutButton.click();
 });

@@ -1,5 +1,5 @@
 {
-  "user": {
+  "registerUser": {
     "password": "P@ssword123",
     "day": "10",
     "month": "5",
@@ -20,6 +20,10 @@
   "incorrectUser": {
     "email": "nonexistentuser@gmail.com",
     "password": "DoesNotExist123!"
+  },
+  "loginUser": {
+    "email": "whitehornmatthewetoro@gmail.com",
+    "password": "P@ssword"
   },
   "search": {
     "product": "Dress"

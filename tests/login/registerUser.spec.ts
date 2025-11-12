@@ -24,7 +24,7 @@ test('Register User and Delete user', async ({ page }) => {
   await homePage.homeLoginButton.click();
   await page.waitForURL(/\/login$/);
   await loginPage.registerUser(registerUserName, registerUserEmail);
-  await registerPage.fillRegistrationForm(testData.user);
+  await registerPage.fillRegistrationForm(testData.registerUser);
   await registerPage.submitForm();
   await expect(registerPage.accountCreatedMessage).toBeVisible();
   await registerPage.continueButton.click();
