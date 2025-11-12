@@ -4,10 +4,14 @@ export class HomePage {
   readonly page: Page;
   readonly url = 'https://www.automationexercise.com/';
   readonly homeLoginButton;
+  readonly homeLogOutButton;
+  readonly testUserLoggedInMessage;
 
   constructor(page: Page) {
     this.page = page;
     this.homeLoginButton = page.getByRole('link', { name: ' Signup / Login' });
+    this.homeLogOutButton = page.getByRole('link', { name: ' Logout' });
+    this.testUserLoggedInMessage = page.getByText('Logged in as MWhitehorn');
   }
 
   async visit() {
