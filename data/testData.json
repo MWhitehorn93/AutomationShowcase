@@ -1,0 +1,27 @@
+{
+  "user": {
+    "password": "P@ssword123",
+    "day": "10",
+    "month": "5",
+    "year": "1993",
+    "newsletter": true,
+    "offers": true,
+    "firstName": "Matthew",
+    "lastName": "Whitehorn",
+    "company": "Automation Showcase",
+    "address1": "123 Main Street",
+    "address2": "Apt 4B",
+    "country": "Canada",
+    "state": "Ontario",
+    "city": "Toronto",
+    "zipcode": "M4B1B3",
+    "mobile": "5551234567"
+  },
+  "search": {
+    "product": "Dress"
+  },
+  "urls": {
+    "base": "https://www.automationexercise.com/",
+    "login": "https://www.automationexercise.com/login"
+  }
+}
