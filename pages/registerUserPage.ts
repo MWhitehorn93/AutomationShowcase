@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 
-export class HomePage {
+export class RegisterUserPage {
   readonly page: Page;
   readonly mrRadioButton;
   readonly passwordInput;
@@ -20,7 +20,11 @@ export class HomePage {
   readonly zipcodeInput;
   readonly mobileNumberInput;
   readonly createAccountButton;
-
+  readonly accountCreatedMessage;
+  readonly continueButton;
+  readonly loggedInAsUser;
+  readonly deleteAccountButton;
+  readonly deleteAccountConfirmationMessage;
   
 
   constructor(page: Page) {
@@ -43,5 +47,31 @@ export class HomePage {
     this.zipcodeInput = page.locator('#zipcode');
     this.mobileNumberInput = page.getByRole('textbox', { name: 'Mobile Number *' });
     this.createAccountButton = page.getByRole('button', { name: 'Create Account' });
+    this.accountCreatedMessage = page.getByText('Account Created!');
+    this.continueButton = page.getByRole('link', { name: 'Continue' });
+    this.loggedInAsUser = page.getByText('Logged in as TestUser');
+    this.deleteAccountButton = page.getByRole('link', { name: ' Delete Account' });
+    this.deleteAccountConfirmationMessage = page.getByText('Account Deleted!');
+  }
+
+  async fillRegistrationForm(data: any) {
+    await this.passwordInput.fill(data.password);
+    await this.daysDropdown.selectOption(data.day);
+    await this.monthsDropdown.selectOption(data.month);
+    await this.yearsDropdown.selectOption(data.year);
+    await this.firstNameInput.fill(data.firstName);
+    await this.lastNameInput.fill(data.lastName);
+    await this.companyInput.fill(data.company);
+    await this.address1Input.fill(data.address1);
+    await this.address2Input.fill(data.address2);
+    await this.countryDropdown.selectOption(data.country);
+    await this.stateInput.fill(data.state);
+    await this.cityInput.fill(data.city);
+    await this.zipcodeInput.fill(data.zipcode);
+    await this.mobileNumberInput.fill(data.mobile);
+  }
+
+  async submitForm() {
+    await this.createAccountButton.click();
   }
 }
