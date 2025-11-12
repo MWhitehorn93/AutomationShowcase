@@ -17,6 +17,10 @@
     "zipcode": "M4B1B3",
     "mobile": "5551234567"
   },
+  "incorrectUser": {
+    "email": "nonexistentuser@gmail.com",
+    "password": "DoesNotExist123!"
+  },
   "search": {
     "product": "Dress"
   },
