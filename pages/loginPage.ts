@@ -11,6 +11,7 @@ export class LoginPage {
   readonly loginPasswordInput;
   readonly loginButton;
   readonly loginErrorMessage;
+  readonly existingEmailErrorMessage;
 
   constructor(page: Page) {
     this.page = page;
@@ -22,6 +23,7 @@ export class LoginPage {
     this.loginPasswordInput = page.locator('[data-qa="login-password"]');
     this.loginButton = page.locator('[data-qa="login-button"]');
     this.loginErrorMessage = page.getByText('Your email or password is');
+    this.existingEmailErrorMessage = page.getByText('Email Address already exist!');
 
   }
 
