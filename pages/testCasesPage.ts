@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 
 export class TestCase {
     readonly page: Page;
@@ -9,5 +9,9 @@ export class TestCase {
     constructor(page: Page) {
         this.page = page;
         this.testCaseTitle = page.locator('b');
+    }
+
+    async expectTestCaseHeader() {
+        await expect(this.testCaseTitle).toHaveText('Test Cases');
     }
 }
