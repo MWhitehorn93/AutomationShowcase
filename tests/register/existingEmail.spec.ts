@@ -16,7 +16,6 @@ const homePage = new HomePage(page);
 test('Register User and Delete user', async ({ page }) => {
   const homePage = new HomePage(page);
   const loginPage = new LoginPage(page);
-  const registerPage = new RegisterUserPage(page);
   
   await homePage.homeLoginButton.click();
   await page.waitForURL(/\/login$/);

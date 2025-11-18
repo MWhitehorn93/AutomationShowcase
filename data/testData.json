@@ -6,8 +6,8 @@
     "year": "1993",
     "newsletter": true,
     "offers": true,
-    "firstName": "Matthew",
-    "lastName": "Whitehorn",
+    "firstName": "Josh",
+    "lastName": "Jacobs",
     "company": "Automation Showcase",
     "address1": "123 Main Street",
     "address2": "Apt 4B",
@@ -31,5 +31,13 @@
   "urls": {
     "base": "https://www.automationexercise.com/",
     "login": "https://www.automationexercise.com/login"
+  }, 
+  "contactUs": {
+    "name": "Jordan Love",
+    "email": "whitehornmatthewetoro+contactTest@gmail.com",
+    "subject": "Test Subject",
+    "message": "This is a test message for the contact us form.", 
+    "filePath": "data/test.pdf"
+
   }
 }
