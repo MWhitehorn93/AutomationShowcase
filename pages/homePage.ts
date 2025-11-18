@@ -7,6 +7,7 @@ export class HomePage {
   readonly homeLogOutButton;
   readonly testUserLoggedInMessage;
   readonly contactUsButton;
+  readonly testCaseButton;
 
   constructor(page: Page) {
     this.page = page;
@@ -14,10 +15,15 @@ export class HomePage {
     this.homeLogOutButton = page.getByRole('link', { name: ' Logout' });
     this.testUserLoggedInMessage = page.getByText('Logged in as MWhitehorn');
     this.contactUsButton = page.getByRole('link', { name: ' Contact us' });
+    this.testCaseButton = page.getByRole('link', { name: ' Test Cases' });
   }
 
   async visit() {
     await this.page.goto(this.url);
+  }
+
+  async navigateToTestCase() {
+    await this.testCaseButton.click();
   }
 }
 
