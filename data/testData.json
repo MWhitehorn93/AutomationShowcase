@@ -51,5 +51,8 @@
     "price": "Rs. 500",
     "availability": "In Stock",
     "condition": "New"
+  },
+  "homePageSubscription": {
+    "email": "whitehornmatthewetoro+hpSubscriptionTest@gmail.com"
   }
 }

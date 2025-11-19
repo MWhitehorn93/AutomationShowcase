@@ -9,6 +9,9 @@ export class HomePage {
   readonly contactUsButton;
   readonly testCaseButton;
   readonly allProductsButton;
+  readonly subscriptionEmailInput;
+  readonly subscribeButton;
+  readonly subscriptionSuccessMessage;
 
   constructor(page: Page) {
     this.page = page;
@@ -18,6 +21,9 @@ export class HomePage {
     this.contactUsButton = page.getByRole('link', { name: ' Contact us' });
     this.testCaseButton = page.getByRole('link', { name: ' Test Cases' });
     this.allProductsButton = page.getByRole('link', { name: ' Products' });
+    this.subscriptionEmailInput = page.getByRole('textbox', { name: 'Your email address' });
+    this.subscribeButton = page.getByRole('button', { name: '' });
+    this.subscriptionSuccessMessage = page.getByText('You have been successfully');
   }
 
   async visit() {
@@ -31,6 +37,12 @@ export class HomePage {
   async navigateToAllProducts() {
     await this.allProductsButton.click();
     await expect(this.page).toHaveURL(/\/products$/);
+  }
+
+  async subscribeToNewsletter(email: string) {
+    await this.subscriptionEmailInput.fill(email);
+    await this.subscribeButton.click();
+    await expect(this.subscriptionSuccessMessage).toBeVisible();
   }
 }
 
