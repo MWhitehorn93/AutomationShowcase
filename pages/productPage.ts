@@ -1,8 +1,14 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 
 export class ProductDetailPage {
+    readonly page: Page
+    readonly productInformation;
 
-    constructor(private page: Page) {}
+    constructor(page: Page) {
+        this.page = page;
+        this.productInformation = page.locator('.product-information');
+
+    }
   
     async getFirstProductDetails() {
         const name = await this.page.locator('.product-information h2').textContent();
@@ -15,14 +21,22 @@ export class ProductDetailPage {
         const condition = await this.page.locator('.product-information p:nth-of-type(3)').textContent();
         const brand = await this.page.locator('.product-information p:nth-of-type(4)').textContent();
 
-    return {
-        name: name?.trim(),
-        category: category?.replace('Category: ', '').replace(' >', '').trim(),
-        price: price?.trim(),
-        availability: availability?.replace('Availability:', '').trim(),
-        condition: condition?.replace('Condition:', '').trim(),
-        brand: brand?.replace('Brand:', '').trim()
-    };
-  }
+        return {
+            name: name?.trim(),
+            category: category?.replace('Category: ', '').replace(' >', '').trim(),
+            price: price?.trim(),
+            availability: availability?.replace('Availability:', '').trim(),
+            condition: condition?.replace('Condition:', '').trim(),
+            brand: brand?.replace('Brand:', '').trim()
+        };
+    }
+    async assertProductDetails(name: string, category: string, price: string, availability: string, condition: string, brand: string){
+        await expect(this.productInformation).toContainText(name);
+        await expect(this.productInformation).toContainText(category);
+        await expect(this.productInformation).toContainText(price);
+        await expect(this.productInformation).toContainText(availability);
+        await expect(this.productInformation).toContainText(condition);
+        await expect(this.productInformation).toContainText(brand);
+    }
 }
 

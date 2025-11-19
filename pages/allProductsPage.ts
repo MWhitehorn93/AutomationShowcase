@@ -13,6 +13,7 @@ export class AllProductsPage {
     readonly firstProductButton;
     readonly productCards;
     readonly continueShoppingButton;
+    readonly viewProductButton;
 
     constructor(page: Page) {
         this.page = page;
@@ -26,6 +27,7 @@ export class AllProductsPage {
         this.firstProductButton = page.getByRole('link', { name: ' View Product' }).first();
         this.productCards = page.locator('.product-image-wrapper');
         this.continueShoppingButton = page.getByRole('button', { name: 'Continue Shopping' });
+        this.viewProductButton = page.getByRole('link', { name: ' View Product' });
     }
 
     async singleSearchProduct(productName: string) {
