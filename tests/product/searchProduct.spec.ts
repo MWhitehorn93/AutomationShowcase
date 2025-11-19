@@ -14,6 +14,6 @@ test('Single Search Product', async ({ page }) => {
     const allProductsPage = new AllProductsPage(page);
 
     await homePage.navigateToAllProducts();
-    await allProductsPage.singleSearchProduct(testData.SingleProduct.productName);
-    await allProductsPage.assertProductSearch(testData.SingleProduct.productName, testData.SingleProduct.price);
+    await allProductsPage.singleSearchProduct(testData.singleProduct.productName);
+    await allProductsPage.assertProductSearch(testData.singleProduct.productName, testData.singleProduct.price);
 });

@@ -39,9 +39,17 @@
     "message": "This is a test message for the contact us form.", 
     "filePath": "data/test.pdf"
   }, 
-  "SingleProduct": {
+  "singleProduct": {
     "productName": "Winter Top",
     "price": "Rs. 600",
     "brand": "Mast & Harbour"
+  }, 
+  "firstProduct": {
+    "productName": "Blue Top",
+    "category": "Women Tops",
+    "brand": "Polo",
+    "price": "Rs. 500",
+    "availability": "In Stock",
+    "condition": "New"
   }
 }
