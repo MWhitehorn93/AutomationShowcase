@@ -52,6 +52,14 @@
     "availability": "In Stock",
     "condition": "New"
   },
+  "secondProduct": {
+    "productName": "Men Tshirt",
+    "category": "Men Tshirts",
+    "brand": "H&M",
+    "price": "Rs. 400",
+    "availability": "In Stock",
+    "condition": "New"
+  },
   "emailSubscription": {
     "email": "whitehornmatthewetoro+hpSubscriptionTest@gmail.com"
   }

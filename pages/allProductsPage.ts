@@ -11,6 +11,8 @@ export class AllProductsPage {
     readonly allProductsForm;
     readonly allProductsTitle;
     readonly firstProductButton;
+    readonly productCards;
+    readonly continueShoppingButton;
 
     constructor(page: Page) {
         this.page = page;
@@ -22,6 +24,8 @@ export class AllProductsPage {
         this.allProductsForm = page.getByText('All Products  Added! Your');
         this.allProductsTitle = page.getByRole('heading', { name: 'All Products' });
         this.firstProductButton = page.getByRole('link', { name: ' View Product' }).first();
+        this.productCards = page.locator('.product-image-wrapper');
+        this.continueShoppingButton = page.getByRole('button', { name: 'Continue Shopping' });
     }
 
     async singleSearchProduct(productName: string) {
@@ -43,5 +47,22 @@ export class AllProductsPage {
 
     async navigateToFirstProduct() {
         await this.firstProductButton.click();
+    }
+
+    async getProductPriceByIndex(index: number) {
+        const priceText = await this.productCards.nth(index).locator('.productinfo h2').textContent();
+        return priceText?.trim() || '';
+    }
+
+    async addProductToCartByIndex(index: number) {
+        const product = this.productCards.nth(index);
+
+        await product.scrollIntoViewIfNeeded();
+        await product.hover();
+        
+        const addToCartButton = product.locator('.product-overlay .add-to-cart');
+
+        await addToCartButton.click();
+        await this.continueShoppingButton.click();
     }
 }
