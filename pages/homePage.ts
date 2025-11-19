@@ -12,6 +12,7 @@ export class HomePage {
   readonly subscriptionEmailInput;
   readonly subscribeButton;
   readonly subscriptionSuccessMessage;
+  readonly cartButton;
 
   constructor(page: Page) {
     this.page = page;
@@ -24,6 +25,7 @@ export class HomePage {
     this.subscriptionEmailInput = page.getByRole('textbox', { name: 'Your email address' });
     this.subscribeButton = page.getByRole('button', { name: '' });
     this.subscriptionSuccessMessage = page.getByText('You have been successfully');
+    this.cartButton = page.getByRole('link', { name: ' Cart' });
   }
 
   async visit() {
@@ -43,6 +45,11 @@ export class HomePage {
     await this.subscriptionEmailInput.fill(email);
     await this.subscribeButton.click();
     await expect(this.subscriptionSuccessMessage).toBeVisible();
+  }
+
+  async navigateToCart() {
+    await this.cartButton.click();
+    await expect(this.page).toHaveURL(/\/view_cart$/);
   }
 }
 

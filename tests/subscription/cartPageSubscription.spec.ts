@@ -1,5 +1,6 @@
 import { test, expect, Page } from '@playwright/test';
 import { HomePage } from '../../pages/HomePage';
+import { CartPage } from '../../pages/cartPage';
 import testData from '../../data/testData.json';
 
 test.beforeEach(async ({ page }) => {
@@ -10,6 +11,8 @@ const homePage = new HomePage(page);
 
 test('Verify subscription functionality on homepage', async ({ page }) => {
     const homePage = new HomePage(page);
-    
-    await homePage.subscribeToNewsletter(testData.emailSubscription.email);
+    const cartPage = new CartPage(page);
+
+    await homePage.navigateToCart();
+    await cartPage.subscribeToNewsletter(testData.emailSubscription.email);
 });
