@@ -41,11 +41,13 @@
   }, 
   "singleProduct": {
     "productName": "Winter Top",
-    "category": "Women Tops",
+    "category": "Women > Tops",
     "price": "Rs. 600",
     "availability": "In Stock",
     "condition": "New",
-    "brand": "Mast & Harbour"
+    "brand": "Mast & Harbour",
+    "quantity": 4,
+    "totalPrice": "Rs. 2400"
   }, 
   "firstProduct": {
     "productName": "Blue Top",

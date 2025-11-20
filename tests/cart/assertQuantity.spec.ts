@@ -29,6 +29,11 @@ test('Add first two products to cart and verify', async ({ page }) => {
         testData.singleProduct.condition,
         testData.singleProduct.brand
     );
+    
+    await productDetailPage.setQuantity(testData.singleProduct.quantity);
+    await productDetailPage.addToCartButton.click();
+    await allProductsPage.viewCartButton.click();
     await page.pause();
-
+    const cartPrice1 = await cartPage.getCartTotalPriceByIndex(0);
+    expect(cartPrice1).toBe(testData.singleProduct.totalPrice);
 });

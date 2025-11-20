@@ -3,10 +3,15 @@ import { Page, expect } from '@playwright/test';
 export class ProductDetailPage {
     readonly page: Page
     readonly productInformation;
+    readonly quantityInput;
+    readonly addToCartButton;
 
     constructor(page: Page) {
         this.page = page;
         this.productInformation = page.locator('.product-information');
+        this.quantityInput = page.locator('#quantity');
+        this.addToCartButton = page.getByRole('button', { name: ' Add to cart' });
+
 
     }
   
@@ -37,6 +42,10 @@ export class ProductDetailPage {
         await expect(this.productInformation).toContainText(availability);
         await expect(this.productInformation).toContainText(condition);
         await expect(this.productInformation).toContainText(brand);
+    }
+
+    async setQuantity(quantity: number) {
+        await this.quantityInput.fill(quantity.toString());
     }
 }
 
