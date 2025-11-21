@@ -7,6 +7,7 @@ export class CartPage {
   readonly subscriptionSuccessMessage;
   readonly cartRows;
   readonly cartDescription;
+  readonly cartQuantity;
 
     constructor(page: Page) {
       this.page = page;
@@ -15,6 +16,7 @@ export class CartPage {
       this.subscriptionSuccessMessage = page.getByText('You have been successfully');
       this.cartRows = page.locator('table.table.table-condensed tbody tr');
       this.cartDescription = page.locator('.cart_description');
+      this.cartQuantity = page.locator('.cart_quantity');
     }
 
     async subscribeToNewsletter(email: string) {

@@ -33,7 +33,11 @@ test('Add first two products to cart and verify', async ({ page }) => {
     await productDetailPage.setQuantity(testData.singleProduct.quantity);
     await productDetailPage.addToCartButton.click();
     await allProductsPage.viewCartButton.click();
-    await page.pause();
+    //await page.pause();
+
+    await expect(cartPage.cartDescription).toContainText(testData.singleProduct.productName);
+    await expect(cartPage.cartDescription).toContainText(testData.singleProduct.category);
+    await expect(cartPage.cartQuantity).toHaveText(testData.singleProduct.quantity.toString());
     const cartPrice1 = await cartPage.getCartTotalPriceByIndex(0);
-    expect(cartPrice1).toBe(testData.singleProduct.totalPrice);
+    await expect(cartPrice1).toBe(testData.singleProduct.totalPrice);
 });
