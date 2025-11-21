@@ -33,8 +33,7 @@ test('Add first two products to cart and verify', async ({ page }) => {
     await productDetailPage.setQuantity(testData.singleProduct.quantity);
     await productDetailPage.addToCartButton.click();
     await allProductsPage.viewCartButton.click();
-    //await page.pause();
-
+    
     await expect(cartPage.cartDescription).toContainText(testData.singleProduct.productName);
     await expect(cartPage.cartDescription).toContainText(testData.singleProduct.category);
     await expect(cartPage.cartQuantity).toHaveText(testData.singleProduct.quantity.toString());
