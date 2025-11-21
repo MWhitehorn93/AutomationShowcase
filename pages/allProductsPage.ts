@@ -12,7 +12,9 @@ export class AllProductsPage {
     readonly allProductsTitle;
     readonly firstProductButton;
     readonly productCards;
+    readonly viewCartButton;
     readonly continueShoppingButton;
+    readonly viewProductButton;
 
     constructor(page: Page) {
         this.page = page;
@@ -25,7 +27,9 @@ export class AllProductsPage {
         this.allProductsTitle = page.getByRole('heading', { name: 'All Products' });
         this.firstProductButton = page.getByRole('link', { name: ' View Product' }).first();
         this.productCards = page.locator('.product-image-wrapper');
+        this.viewCartButton = page.getByRole('link', { name: 'View Cart' });
         this.continueShoppingButton = page.getByRole('button', { name: 'Continue Shopping' });
+        this.viewProductButton = page.getByRole('link', { name: ' View Product' });
     }
 
     async singleSearchProduct(productName: string) {

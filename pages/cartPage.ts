@@ -6,6 +6,8 @@ export class CartPage {
   readonly subscribeButton;
   readonly subscriptionSuccessMessage;
   readonly cartRows;
+  readonly cartDescription;
+  readonly cartQuantity;
 
     constructor(page: Page) {
       this.page = page;
@@ -13,6 +15,8 @@ export class CartPage {
       this.subscribeButton = page.getByRole('button', { name: '' });
       this.subscriptionSuccessMessage = page.getByText('You have been successfully');
       this.cartRows = page.locator('table.table.table-condensed tbody tr');
+      this.cartDescription = page.locator('.cart_description');
+      this.cartQuantity = page.locator('.cart_quantity');
     }
 
     async subscribeToNewsletter(email: string) {
@@ -28,4 +32,14 @@ export class CartPage {
 
       return price?.trim() ?? '';
     }
+    async getCartTotalPriceByIndex(index: number): Promise<string> {
+      const row = this.cartRows.nth(index);
+
+      const price = await row.locator('.cart_total_price').textContent();
+
+      return price?.trim() ?? '';
+    }
+
+
+    
 }
