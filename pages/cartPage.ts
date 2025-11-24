@@ -8,6 +8,8 @@ export class CartPage {
   readonly cartRows;
   readonly cartDescription;
   readonly cartQuantity;
+  readonly proceedToCheckoutButton;
+  readonly registerLoginWhileCheckoutButton;
 
     constructor(page: Page) {
       this.page = page;
@@ -17,6 +19,8 @@ export class CartPage {
       this.cartRows = page.locator('table.table.table-condensed tbody tr');
       this.cartDescription = page.locator('.cart_description');
       this.cartQuantity = page.locator('.cart_quantity');
+      this.proceedToCheckoutButton = page.getByText('Proceed To Checkout');
+      this.registerLoginWhileCheckoutButton = page.getByRole('link', { name: 'Register / Login' })
     }
 
     async subscribeToNewsletter(email: string) {
