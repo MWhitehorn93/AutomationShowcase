@@ -30,6 +30,19 @@ test('Rigister While Checkout', async ({ page }) => {
     await cartPage.registerLoginWhileCheckoutButton.click();
     await loginPage.registerUser(registerUserName, registerUserEmail);
     await registerUserPage.fillRegistrationForm(testData.registerUser);
+    await registerUserPage.submitForm();
+    await expect(registerUserPage.accountCreatedMessage).toBeVisible();
+    await registerUserPage.continueButton.click();
+    await expect(homePage.loggedInAsUser).toBeVisible();
+    await homePage.navigateToCart();
+    await cartPage.proceedToCheckoutButton.click();
+    await cartPage.placeOrderButton.click();
+    
+    await cartPage.enterPaymentDetailsAndPay(
+        testData.cardDetails.nameOnCard,
+        testData.cardDetails.cardNumber,
+        testData.cardDetails.cvc,
+        testData.cardDetails.expirationMonth,
+        testData.cardDetails.expirationYear)   
     await page.pause();
-
 });
