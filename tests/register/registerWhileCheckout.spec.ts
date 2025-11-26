@@ -36,6 +36,7 @@ test('Rigister While Checkout', async ({ page }) => {
     await expect(homePage.loggedInAsUser).toBeVisible();
     await homePage.navigateToCart();
     await cartPage.proceedToCheckoutButton.click();
+    await page.pause();
     await cartPage.placeOrderButton.click();
     
     await cartPage.enterPaymentDetailsAndPay(
@@ -43,6 +44,7 @@ test('Rigister While Checkout', async ({ page }) => {
         testData.cardDetails.cardNumber,
         testData.cardDetails.cvc,
         testData.cardDetails.expirationMonth,
-        testData.cardDetails.expirationYear)   
-    await page.pause();
+        testData.cardDetails.expirationYear);
+    await cartPage.assertOrderPlaced();
+    await registerUserPage.deleteAccount();
 });

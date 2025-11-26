@@ -17,6 +17,9 @@ export class CartPage {
   readonly expirationMonthInput;
   readonly expirationYearInput;
   readonly payButton;
+  readonly orderPlacedHeader;
+  readonly orderPlacedMessage;
+  readonly addressBox;
 
     constructor(page: Page) {
       this.page = page;
@@ -35,6 +38,9 @@ export class CartPage {
       this.expirationMonthInput = page.getByRole('textbox', { name: 'MM' });
       this.expirationYearInput = page.getByRole('textbox', { name: 'YYYY' });
       this.payButton = page.getByRole('button', { name: 'Pay and Confirm Order' });
+      this.orderPlacedHeader = page.getByText('Order Placed!');
+      this.orderPlacedMessage = page.getByText('Congratulations! Your order');
+      this.addressBox = page.locator('.address');
     }
 
     async subscribeToNewsletter(email: string) {
@@ -67,4 +73,9 @@ export class CartPage {
       await this.expirationYearInput.fill(expiryYear);
       await this.payButton.click();
     }
+
+    async assertOrderPlaced() {
+      await expect(this.orderPlacedHeader).toBeVisible();
+      await expect(this.orderPlacedMessage).toBeVisible();
+}
 }
