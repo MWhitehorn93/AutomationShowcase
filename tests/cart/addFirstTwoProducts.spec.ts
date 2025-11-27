@@ -22,7 +22,6 @@ test('Add first two products to cart and verify', async ({ page }) => {
     await allProductsPage.addProductToCartByIndex(0);
     await allProductsPage.addProductToCartByIndex(1);
 
-    await page.pause();
     await homePage.cartButton.click();
     
     const cartPrice1 = await cartPage.getCartProductPriceByIndex(0);

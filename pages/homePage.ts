@@ -13,6 +13,7 @@ export class HomePage {
   readonly subscribeButton;
   readonly subscriptionSuccessMessage;
   readonly cartButton;
+  readonly loggedInAsUser;
 
   constructor(page: Page) {
     this.page = page;
@@ -26,6 +27,7 @@ export class HomePage {
     this.subscribeButton = page.getByRole('button', { name: '' });
     this.subscriptionSuccessMessage = page.getByText('You have been successfully');
     this.cartButton = page.getByRole('link', { name: ' Cart' });
+    this.loggedInAsUser = page.getByText('Logged in as TestUser');
   }
 
   async visit() {

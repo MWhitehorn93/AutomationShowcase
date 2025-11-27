@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 
 export class RegisterUserPage {
   readonly page: Page;
@@ -73,5 +73,10 @@ export class RegisterUserPage {
 
   async submitForm() {
     await this.createAccountButton.click();
+  }
+
+  async deleteAccount() {
+    await this.deleteAccountButton.click();
+    await expect(this.deleteAccountConfirmationMessage).toBeVisible();
   }
 }
