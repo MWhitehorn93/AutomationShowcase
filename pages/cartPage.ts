@@ -77,5 +77,14 @@ export class CartPage {
     async assertOrderPlaced() {
       await expect(this.orderPlacedHeader).toBeVisible();
       await expect(this.orderPlacedMessage).toBeVisible();
-}
+    }
+
+    async assertDeliveryAddress(address1: string, address2: string, city: string, state: string, zipCode: string, country: string) {
+      await expect(this.addressBox).toContainText(address1);
+      await expect(this.addressBox).toContainText(address2);
+      await expect(this.addressBox).toContainText(city);
+      await expect(this.addressBox).toContainText(state);
+      await expect(this.addressBox).toContainText(zipCode);
+      await expect(this.addressBox).toContainText(country);
+    }
 }
