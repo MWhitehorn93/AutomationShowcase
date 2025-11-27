@@ -36,9 +36,7 @@ test('Rigister While Checkout', async ({ page }) => {
     await expect(homePage.loggedInAsUser).toBeVisible();
     await homePage.navigateToCart();
     await cartPage.proceedToCheckoutButton.click();
-    await page.pause();
     await cartPage.placeOrderButton.click();
-    
     await cartPage.enterPaymentDetailsAndPay(
         testData.cardDetails.nameOnCard,
         testData.cardDetails.cardNumber,
