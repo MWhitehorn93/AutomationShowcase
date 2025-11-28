@@ -5,14 +5,22 @@ export class ProductDetailPage {
     readonly productInformation;
     readonly quantityInput;
     readonly addToCartButton;
+    readonly reviewNameInput;
+    readonly reviewEmailInput;
+    readonly reviewInput;
+    readonly reviewSubmitButton;
+    readonly successMessage;
 
     constructor(page: Page) {
         this.page = page;
         this.productInformation = page.locator('.product-information');
         this.quantityInput = page.locator('#quantity');
         this.addToCartButton = page.getByRole('button', { name: ' Add to cart' });
-
-
+        this.reviewNameInput = page.getByRole('textbox', { name: 'Your Name' });
+        this.reviewEmailInput = page.getByRole('textbox', { name: 'Email Address', exact: true });
+        this.reviewInput = page.getByRole('textbox', { name: 'Add Review Here!' });
+        this.reviewSubmitButton = page.getByRole('button', { name: 'Submit' });
+        this.successMessage = page.getByText('Thank you for your review.');
     }
   
     async getFirstProductDetails() {
@@ -46,6 +54,14 @@ export class ProductDetailPage {
 
     async setQuantity(quantity: number) {
         await this.quantityInput.fill(quantity.toString());
+    }
+
+    async writeReview(name: string, email: string, reviewText: string) {
+        await this.reviewNameInput.fill(name);
+        await this.reviewEmailInput.fill(email);
+        await this.reviewInput.fill(reviewText);
+        await this.reviewSubmitButton.click();
+        await expect(this.successMessage).toBeVisible();
     }
 }
 
