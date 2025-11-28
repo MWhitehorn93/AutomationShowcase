@@ -15,33 +15,32 @@ test.beforeEach(async ({ page }) => {
     await homePage.visit();
 });
 
-test('Register While Checkout', async ({ page }) => {
+test('Register Before Checkout', async ({ page }) => {
     const homePage = new HomePage(page);
-    const registerUserPage = new RegisterUserPage(page);
     const loginPage = new LoginPage(page);
+    const registerPage = new RegisterUserPage(page);
     const allProductsPage = new AllProductsPage(page);
     const cartPage = new CartPage(page);
 
+    await homePage.homeLoginButton.click();
+    await page.waitForURL(/\/login$/);
+    await loginPage.registerUser(registerUserName, registerUserEmail);
+    await registerPage.fillRegistrationForm(testData.registerUser);
+    await registerPage.submitForm();
+    await expect(registerPage.accountCreatedMessage).toBeVisible();
+    await registerPage.continueButton.click();
+    await expect(homePage.loggedInAsUser).toBeVisible();
     await homePage.navigateToAllProducts();
     await allProductsPage.addProductToCartByIndex(0);
     await homePage.navigateToCart();
     await cartPage.proceedToCheckoutButton.click();
-    await cartPage.registerLoginWhileCheckoutButton.click();
-    await loginPage.registerUser(registerUserName, registerUserEmail);
-    await registerUserPage.fillRegistrationForm(testData.registerUser);
-    await registerUserPage.submitForm();
-    await expect(registerUserPage.accountCreatedMessage).toBeVisible();
-    await registerUserPage.continueButton.click();
-    await expect(homePage.loggedInAsUser).toBeVisible();
-    await homePage.navigateToCart();
-    await cartPage.proceedToCheckoutButton.click();
-    await cartPage.placeOrderButton.click();
-    await cartPage.enterPaymentDetailsAndPay(
-        testData.cardDetails.nameOnCard,
-        testData.cardDetails.cardNumber,
-        testData.cardDetails.cvc,
-        testData.cardDetails.expirationMonth,
-        testData.cardDetails.expirationYear);
-    await cartPage.assertOrderPlaced();
-    await registerUserPage.deleteAccount();
-});
+    await page.waitForURL(/\/checkout$/);
+    await cartPage.assertDeliveryAddress(
+        testData.registerUser.address1,
+        testData.registerUser.address2,
+        testData.registerUser.city,
+        testData.registerUser.state,
+        testData.registerUser.zipcode,
+        testData.registerUser.country
+    );
+})
