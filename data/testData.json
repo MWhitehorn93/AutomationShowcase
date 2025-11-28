@@ -74,5 +74,10 @@
     "cvc": "123",
     "expirationMonth": "12",
     "expirationYear": "2030"
+  }, 
+  "review": {
+    "name": "Micah Parson",
+    "email": "whitehornmatthewetoro+reviewTest@gmail.com",
+    "reviewText": "This is a review for this product. It works great!"
   }
 }
