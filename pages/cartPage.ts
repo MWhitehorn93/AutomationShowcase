@@ -40,7 +40,7 @@ export class CartPage {
       this.payButton = page.getByRole('button', { name: 'Pay and Confirm Order' });
       this.orderPlacedHeader = page.getByText('Order Placed!');
       this.orderPlacedMessage = page.getByText('Congratulations! Your order');
-      this.addressBox = page.locator('.address');
+      this.addressBox = page.getByText('Your delivery address . Josh');
     }
 
     async subscribeToNewsletter(email: string) {

@@ -35,7 +35,6 @@ test('Register Before Checkout', async ({ page }) => {
     await homePage.navigateToCart();
     await cartPage.proceedToCheckoutButton.click();
     await page.waitForURL(/\/checkout$/);
-    await page.pause();
     await cartPage.assertDeliveryAddress(
         testData.registerUser.address1,
         testData.registerUser.address2,
@@ -44,7 +43,4 @@ test('Register Before Checkout', async ({ page }) => {
         testData.registerUser.zipcode,
         testData.registerUser.country
     );
-
-
-
 })
