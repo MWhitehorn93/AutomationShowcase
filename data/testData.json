@@ -15,7 +15,8 @@
     "state": "Ontario",
     "city": "Toronto",
     "zipcode": "M4B1B3",
-    "mobile": "5551234567"
+    "mobile": "5551234567",
+    "containerSelector": "Josh"
   },
   "incorrectUser": {
     "email": "nonexistentuser@gmail.com",
@@ -23,7 +24,18 @@
   },
   "loginUser": {
     "email": "whitehornmatthewetoro@gmail.com",
-    "password": "P@ssword"
+    "password": "password", 
+    "userName": "Ernie Clement",
+    "name": "Test User",
+    "address1": "Rodgers Centre",
+    "address2": "1 Blue Jays Way",
+    "city": "Toronto",
+    "state": "Ontario",
+    "zipcode": "M5V1J3",
+    "country": "Canada",
+    "mobile": "++16475467729",
+    "containerSelector": "Ernie"
+
   },
   "search": {
     "product": "Dress"

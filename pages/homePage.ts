@@ -53,5 +53,9 @@ export class HomePage {
     await this.cartButton.click();
     await expect(this.page).toHaveURL(/\/view_cart$/);
   }
+
+  getLoggedInAsText(username: string) {
+    return this.page.getByText(`Logged in as ${username}`);
+}
 }
 
