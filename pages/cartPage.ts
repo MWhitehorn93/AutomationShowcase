@@ -79,12 +79,16 @@ export class CartPage {
       await expect(this.orderPlacedMessage).toBeVisible();
     }
 
-    async assertDeliveryAddress(address1: string, address2: string, city: string, state: string, zipCode: string, country: string) {
-      await expect(this.addressBox).toContainText(address1);
-      await expect(this.addressBox).toContainText(address2);
-      await expect(this.addressBox).toContainText(city);
-      await expect(this.addressBox).toContainText(state);
-      await expect(this.addressBox).toContainText(zipCode);
-      await expect(this.addressBox).toContainText(country);
+    getDeliveryAddressHeader(name: string) {
+    return this.page.getByText(`Your delivery address . ${name}`);
+    }
+
+    async assertDeliveryAddress(firstName: string, address1: string, address2: string, city: string, state: string, zipCode: string, country: string) {
+      await expect(this.getDeliveryAddressHeader(firstName)).toContainText(address1);
+      await expect(this.getDeliveryAddressHeader(firstName)).toContainText(address2);
+      await expect(this.getDeliveryAddressHeader(firstName)).toContainText(city);
+      await expect(this.getDeliveryAddressHeader(firstName)).toContainText(state);
+      await expect(this.getDeliveryAddressHeader(firstName)).toContainText(zipCode);
+      await expect(this.getDeliveryAddressHeader(firstName)).toContainText(country);
     }
 }

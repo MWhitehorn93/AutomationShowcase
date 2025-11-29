@@ -24,23 +24,28 @@ test('Register Before Checkout', async ({ page }) => {
 
     await homePage.homeLoginButton.click();
     await page.waitForURL(/\/login$/);
-    await loginPage.registerUser(registerUserName, registerUserEmail);
-    await registerPage.fillRegistrationForm(testData.registerUser);
-    await registerPage.submitForm();
-    await expect(registerPage.accountCreatedMessage).toBeVisible();
-    await registerPage.continueButton.click();
-    await expect(homePage.loggedInAsUser).toBeVisible();
+    await loginPage.loginUser(testData.loginUser.email, testData.loginUser.password);
+    await expect(homePage.getLoggedInAsText(testData.loginUser.userName)).toBeVisible();
     await homePage.navigateToAllProducts();
     await allProductsPage.addProductToCartByIndex(0);
     await homePage.navigateToCart();
     await cartPage.proceedToCheckoutButton.click();
     await page.waitForURL(/\/checkout$/);
     await cartPage.assertDeliveryAddress(
-        testData.registerUser.address1,
-        testData.registerUser.address2,
-        testData.registerUser.city,
-        testData.registerUser.state,
-        testData.registerUser.zipcode,
-        testData.registerUser.country
-    );
+       testData.loginUser.containerSelector,
+       testData.loginUser.address1,
+       testData.loginUser.address2,
+       testData.loginUser.city,
+       testData.loginUser.state,
+       testData.loginUser.zipcode,
+       testData.loginUser.country
+        );
+    await cartPage.placeOrderButton.click();
+    await cartPage.enterPaymentDetailsAndPay(
+        testData.cardDetails.nameOnCard,
+        testData.cardDetails.cardNumber,
+        testData.cardDetails.cvc,
+        testData.cardDetails.expirationMonth,
+        testData.cardDetails.expirationYear);
+    await cartPage.assertOrderPlaced();
 })
