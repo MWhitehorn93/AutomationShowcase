@@ -14,6 +14,12 @@ export class HomePage {
   readonly subscriptionSuccessMessage;
   readonly cartButton;
   readonly loggedInAsUser;
+  readonly womenCategoryButton;
+  readonly womenDressCategoryButton;
+  readonly womenDressCategoryHeader;
+  readonly mensCategoryButton;
+  readonly menJeansCategoryButton;
+  readonly meanJeansHeader;
 
   constructor(page: Page) {
     this.page = page;
@@ -28,6 +34,13 @@ export class HomePage {
     this.subscriptionSuccessMessage = page.getByText('You have been successfully');
     this.cartButton = page.getByRole('link', { name: ' Cart' });
     this.loggedInAsUser = page.getByText('Logged in as TestUser');
+    this.womenCategoryButton = page.getByRole('link', { name: ' Women' });
+    this.womenDressCategoryButton = page.getByRole('link', { name: 'Dress' });
+    this.womenDressCategoryHeader = page.getByRole('heading', { name: 'Women -  Dress Products' });
+    this.mensCategoryButton = page.getByRole('link', { name: ' Men' });
+    this.menJeansCategoryButton = page.getByRole('link', { name: 'Jeans' });
+    this.meanJeansHeader = page.getByRole('heading', { name: 'Men -  Jeans Products' });
+
   }
 
   async visit() {
