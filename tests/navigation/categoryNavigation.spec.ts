@@ -1,8 +1,5 @@
 import { test, expect, Page } from '@playwright/test';
 import { HomePage } from '../../pages/HomePage';
-import { AllProductsPage } from '../../pages/allProductsPage';
-import testData from '../../data/testData.json';
-import { ProductDetailPage } from '../../pages/productPage';
 
 test.beforeEach(async ({ page }) => {
     const homePage = new HomePage(page);
