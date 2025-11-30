@@ -20,6 +20,8 @@ export class HomePage {
   readonly mensCategoryButton;
   readonly menJeansCategoryButton;
   readonly meanJeansHeader;
+  readonly poloBrandButton;
+  readonly mastAndHarborBrandButton;
 
   constructor(page: Page) {
     this.page = page;
@@ -40,6 +42,8 @@ export class HomePage {
     this.mensCategoryButton = page.getByRole('link', { name: ' Men' });
     this.menJeansCategoryButton = page.getByRole('link', { name: 'Jeans' });
     this.meanJeansHeader = page.getByRole('heading', { name: 'Men -  Jeans Products' });
+    this.poloBrandButton = page.getByRole('link', { name: 'Polo' });
+    this.mastAndHarborBrandButton = page.getByRole('link', { name: '(3) Mast & Harbour' });
 
   }
 
