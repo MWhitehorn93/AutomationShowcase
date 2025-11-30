@@ -20,6 +20,8 @@ export class CartPage {
   readonly orderPlacedHeader;
   readonly orderPlacedMessage;
   readonly addressBox;
+  readonly cartBody;
+  readonly removeFirstProductButton;
 
     constructor(page: Page) {
       this.page = page;
@@ -41,6 +43,8 @@ export class CartPage {
       this.orderPlacedHeader = page.getByText('Order Placed!');
       this.orderPlacedMessage = page.getByText('Congratulations! Your order');
       this.addressBox = page.getByText('Your delivery address . Josh');
+      this.cartBody = page.locator('#cart_info');
+      this.removeFirstProductButton = page.locator('.cart_quantity_delete').first()
     }
 
     async subscribeToNewsletter(email: string) {
@@ -90,5 +94,13 @@ export class CartPage {
       await expect(this.getDeliveryAddressHeader(firstName)).toContainText(state);
       await expect(this.getDeliveryAddressHeader(firstName)).toContainText(zipCode);
       await expect(this.getDeliveryAddressHeader(firstName)).toContainText(country);
+    }
+
+    async assertProductsInCart(productName: string, productCategory: string) {
+      await expect(this.cartBody).toContainText(productName);
+    }
+
+    async assertProductsNotInCart(productName: string, productCategory: string) {
+      await expect(this.cartBody).not.toContainText(productName);
     }
 }
