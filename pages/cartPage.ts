@@ -96,11 +96,11 @@ export class CartPage {
       await expect(this.getDeliveryAddressHeader(firstName)).toContainText(country);
     }
 
-    async assertProductsInCart(productName: string, productCategory: string) {
+    async assertProductsInCart(productName: string) {
       await expect(this.cartBody).toContainText(productName);
     }
 
-    async assertProductsNotInCart(productName: string, productCategory: string) {
+    async assertProductsNotInCart(productName: string) {
       await expect(this.cartBody).not.toContainText(productName);
     }
 }

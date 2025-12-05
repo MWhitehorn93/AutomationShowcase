@@ -10,6 +10,7 @@ export class ProductDetailPage {
     readonly reviewInput;
     readonly reviewSubmitButton;
     readonly successMessage;
+    readonly viewCartButton;
 
     constructor(page: Page) {
         this.page = page;
@@ -21,6 +22,7 @@ export class ProductDetailPage {
         this.reviewInput = page.getByRole('textbox', { name: 'Add Review Here!' });
         this.reviewSubmitButton = page.getByRole('button', { name: 'Submit' });
         this.successMessage = page.getByText('Thank you for your review.');
+        this.viewCartButton = page.getByRole('link', { name: 'View Cart' });
     }
   
     async getFirstProductDetails() {
