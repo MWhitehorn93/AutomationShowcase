@@ -24,8 +24,9 @@ test('Search for a product, add to cart before login, and verify', async ({ page
     await allProductsPage.navigateToFirstProduct();
     await productPage.addToCartButton.click();
     await productPage.viewCartButton.click();
-    await page.pause();
-
-
-
-})
+    await cartPage.assertProductsInCart(testData.singleProduct.productName);
+    await homePage.homeLoginButton.click();
+    await loginPage.loginUser(testData.loginUser.email, testData.loginUser.password);
+    await homePage.navigateToCart();
+    await cartPage.assertProductsInCart(testData.singleProduct.productName);
+});
