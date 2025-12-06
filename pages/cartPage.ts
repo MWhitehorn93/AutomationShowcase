@@ -22,6 +22,7 @@ export class CartPage {
   readonly addressBox;
   readonly cartBody;
   readonly removeFirstProductButton;
+  readonly downloadInvoiceButton;
 
     constructor(page: Page) {
       this.page = page;
@@ -44,7 +45,8 @@ export class CartPage {
       this.orderPlacedMessage = page.getByText('Congratulations! Your order');
       this.addressBox = page.getByText('Your delivery address . Josh');
       this.cartBody = page.locator('#cart_info');
-      this.removeFirstProductButton = page.locator('.cart_quantity_delete').first()
+      this.removeFirstProductButton = page.locator('.cart_quantity_delete').first();
+      this.downloadInvoiceButton = page.getByRole('link', { name: 'Download Invoice' });
     }
 
     async subscribeToNewsletter(email: string) {
