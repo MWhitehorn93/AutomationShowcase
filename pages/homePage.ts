@@ -22,6 +22,8 @@ export class HomePage {
   readonly meanJeansHeader;
   readonly poloBrandButton;
   readonly mastAndHarborBrandButton;
+  readonly recommendedItemsHeader;
+  readonly recommendedCarousel;
 
   constructor(page: Page) {
     this.page = page;
@@ -44,7 +46,8 @@ export class HomePage {
     this.meanJeansHeader = page.getByRole('heading', { name: 'Men -  Jeans Products' });
     this.poloBrandButton = page.getByRole('link', { name: 'Polo' });
     this.mastAndHarborBrandButton = page.getByRole('link', { name: '(3) Mast & Harbour' });
-
+    this.recommendedItemsHeader = page.getByRole('heading', { name: 'recommended items' });
+    this.recommendedCarousel = page.locator('#recommended-item-carousel');
   }
 
   async visit() {
@@ -73,6 +76,31 @@ export class HomePage {
 
   getLoggedInAsText(username: string) {
     return this.page.getByText(`Logged in as ${username}`);
-}
+  }
+
+  async addRecommendedItemToCartByIndex(index: number) {
+    const card = this.recommendedCarousel.locator('.product-image-wrapper').nth(index);
+
+    await card.scrollIntoViewIfNeeded();
+    await card.hover();
+
+    await card.locator('a.add-to-cart').click();
+  
+    const continueBtn = this.page.getByText('Continue Shopping', { exact: true });
+    await continueBtn.waitFor({ state: 'visible', timeout: 5000 });
+    await continueBtn.click();
+  }
+
+  async getRecommendedItemDetailsByIndex(index: number): Promise<{ name: string; price: string }> {
+    const card = this.recommendedCarousel.locator('.product-image-wrapper').nth(index);
+
+    const priceRaw = await card.locator('.productinfo h2').first().textContent();
+    const nameRaw = await card.locator('.productinfo p').first().textContent();
+
+    return {
+      name: (nameRaw ?? '').trim(),
+      price: (priceRaw ?? '').trim()
+    };
+  }
 }
 

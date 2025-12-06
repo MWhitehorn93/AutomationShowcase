@@ -61,6 +61,12 @@ export class CartPage {
       return price?.trim() ?? '';
     }
 
+    async getCartProductNameByIndex(index: number): Promise<string> {
+      const row = this.cartRows.nth(index);
+      const raw = await row.locator('.cart_description h4 a').textContent();
+      return (raw ?? '').trim();
+    }
+
     async getCartTotalPriceByIndex(index: number): Promise<string> {
       const row = this.cartRows.nth(index);
 
