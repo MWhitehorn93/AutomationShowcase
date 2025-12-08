@@ -34,7 +34,17 @@ test('Register Before Checkout', async ({ page }) => {
     await allProductsPage.addProductToCartByIndex(0);
     await homePage.navigateToCart();
     await cartPage.proceedToCheckoutButton.click();
+    await page.waitForURL(/\/checkout$/);
     await cartPage.assertDeliveryAddress(
+        testData.registerUser.containerSelector,
+        testData.registerUser.address1,
+        testData.registerUser.address2,
+        testData.registerUser.city,
+        testData.registerUser.state,
+        testData.registerUser.zipcode,
+        testData.registerUser.country
+    );
+    await cartPage.assertBillingAddress(
         testData.registerUser.containerSelector,
         testData.registerUser.address1,
         testData.registerUser.address2,
@@ -53,5 +63,4 @@ test('Register Before Checkout', async ({ page }) => {
     await cartPage.assertOrderPlaced();
     await cartPage.downloadInvoiceButton.click();
     await registerPage.deleteAccount();
-    
-})
+});

@@ -35,6 +35,25 @@ test('Register While Checkout', async ({ page }) => {
     await expect(homePage.loggedInAsUser).toBeVisible();
     await homePage.navigateToCart();
     await cartPage.proceedToCheckoutButton.click();
+    await page.waitForURL(/\/checkout$/);
+    await cartPage.assertDeliveryAddress(
+       testData.loginUser.containerSelector,
+       testData.loginUser.address1,
+       testData.loginUser.address2,
+       testData.loginUser.city,
+       testData.loginUser.state,
+       testData.loginUser.zipcode,
+       testData.loginUser.country
+        );
+    await cartPage.assertBillingAddress(
+         testData.loginUser.containerSelector,
+            testData.loginUser.address1,
+            testData.loginUser.address2,
+            testData.loginUser.city,
+            testData.loginUser.state,
+            testData.loginUser.zipcode,
+            testData.loginUser.country
+    );
     await cartPage.placeOrderButton.click();
     await cartPage.enterPaymentDetailsAndPay(
         testData.cardDetails.nameOnCard,
@@ -43,5 +62,6 @@ test('Register While Checkout', async ({ page }) => {
         testData.cardDetails.expirationMonth,
         testData.cardDetails.expirationYear);
     await cartPage.assertOrderPlaced();
+    await cartPage.downloadInvoiceButton.click();
     await registerUserPage.deleteAccount();
 });
