@@ -20,7 +20,7 @@ test('Remove all products from cart and verify cart is empty', async ({ page }) 
     await allProductsPage.addProductToCartByIndex(1);
     await allProductsPage.addProductToCartByIndex(2);
     await homePage.cartButton.click();
-    await cartPage.assertProductsInCart(testData.firstProduct.productName, testData.firstProduct.category);
+    await cartPage.assertProductsInCart(testData.firstProduct.productName);
     await cartPage.removeFirstProductButton.click();
-    await cartPage.assertProductsNotInCart(testData.firstProduct.productName, testData.firstProduct.category);
+    await cartPage.assertProductsNotInCart(testData.firstProduct.productName);
 })
