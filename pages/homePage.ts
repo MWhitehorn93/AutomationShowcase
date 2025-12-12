@@ -5,7 +5,6 @@ export class HomePage {
   readonly url = 'https://www.automationexercise.com/';
   readonly homeLoginButton;
   readonly homeLogOutButton;
-  readonly testUserLoggedInMessage;
   readonly contactUsButton;
   readonly testCaseButton;
   readonly allProductsButton;
@@ -29,7 +28,6 @@ export class HomePage {
     this.page = page;
     this.homeLoginButton = page.getByRole('link', { name: ' Signup / Login' });
     this.homeLogOutButton = page.getByRole('link', { name: ' Logout' });
-    this.testUserLoggedInMessage = page.getByText('Logged in as MWhitehorn');
     this.contactUsButton = page.getByRole('link', { name: ' Contact us' });
     this.testCaseButton = page.getByRole('link', { name: ' Test Cases' });
     this.allProductsButton = page.getByRole('link', { name: ' Products' });

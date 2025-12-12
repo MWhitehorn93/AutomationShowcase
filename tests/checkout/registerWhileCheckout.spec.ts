@@ -37,22 +37,22 @@ test('Register While Checkout', async ({ page }) => {
     await cartPage.proceedToCheckoutButton.click();
     await page.waitForURL(/\/checkout$/);
     await cartPage.assertDeliveryAddress(
-       testData.loginUser.containerSelector,
-       testData.loginUser.address1,
-       testData.loginUser.address2,
-       testData.loginUser.city,
-       testData.loginUser.state,
-       testData.loginUser.zipcode,
-       testData.loginUser.country
+       testData.registerUser.containerSelector,
+       testData.registerUser.address1,
+       testData.registerUser.address2,
+       testData.registerUser.city,
+       testData.registerUser.state,
+       testData.registerUser.zipcode,
+       testData.registerUser.country
         );
     await cartPage.assertBillingAddress(
-         testData.loginUser.containerSelector,
-            testData.loginUser.address1,
-            testData.loginUser.address2,
-            testData.loginUser.city,
-            testData.loginUser.state,
-            testData.loginUser.zipcode,
-            testData.loginUser.country
+         testData.registerUser.containerSelector,
+            testData.registerUser.address1,
+            testData.registerUser.address2,
+            testData.registerUser.city,
+            testData.registerUser.state,
+            testData.registerUser.zipcode,
+            testData.registerUser.country
     );
     await cartPage.placeOrderButton.click();
     await cartPage.enterPaymentDetailsAndPay(
