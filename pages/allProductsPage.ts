@@ -2,7 +2,6 @@ import { expect, Page } from '@playwright/test';
 
 export class AllProductsPage {
     readonly page: Page;
-    readonly url = 'https://www.automationexercise.com/products';
     readonly pageTitle;
     readonly searchBar;
     readonly searchButton;
