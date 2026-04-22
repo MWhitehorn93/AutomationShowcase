@@ -1,14 +1,10 @@
-import { test, expect, Page } from '@playwright/test';
-import { HomePage } from '../../pages/HomePage';
+import { test, expect } from '../../fixtures';
 
-test.beforeEach(async ({ page }) => {
-    const homePage = new HomePage(page);
-
+test.beforeEach(async ({ homePage }) => {
     await homePage.visit();
 });
 
-test('Navigate to product category', async ({ page }) => {
-    const homePage = new HomePage(page);
+test('Navigate to product category', async ({ homePage }) => {
     
     await expect(homePage.womenCategoryButton).toBeVisible();
     await homePage.womenCategoryButton.click();

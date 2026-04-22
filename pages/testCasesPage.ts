@@ -2,9 +2,7 @@ import { Page } from '@playwright/test';
 
 export class TestCase {
     readonly page: Page;
-    readonly url = 'https://www.automationexercise.com/test_cases';
     readonly testCaseTitle;
-
 
     constructor(page: Page) {
         this.page = page;

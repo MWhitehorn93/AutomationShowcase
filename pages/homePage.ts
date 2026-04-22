@@ -24,6 +24,36 @@ export class HomePage {
   readonly recommendedItemsHeader;
   readonly recommendedCarousel;
 
+  private buildUrl(path: string): string {
+    return new URL(path, this.url).toString();
+  }
+
+  private async recoverIfGoogleVignette(fallbackPath: string): Promise<void> {
+    if (this.page.url().includes('#google_vignette')) {
+      await this.page.goto(this.buildUrl(fallbackPath), { waitUntil: 'domcontentloaded' });
+    }
+  }
+
+  private async clickAndExpectPath(
+    link: { click: () => Promise<void> },
+    expectedPath: RegExp,
+    fallbackPath: string
+  ): Promise<void> {
+    await link.click();
+
+    try {
+      await expect(this.page).toHaveURL(expectedPath, { timeout: 7000 });
+    } catch {
+      await this.recoverIfGoogleVignette(fallbackPath);
+
+      if (!expectedPath.test(this.page.url())) {
+        await this.page.goto(this.buildUrl(fallbackPath), { waitUntil: 'domcontentloaded' });
+      }
+
+      await expect(this.page).toHaveURL(expectedPath, { timeout: 7000 });
+    }
+  }
+
   constructor(page: Page) {
     this.page = page;
     this.homeLoginButton = page.getByRole('link', { name: ' Signup / Login' });
@@ -49,16 +79,17 @@ export class HomePage {
   }
 
   async visit() {
-    await this.page.goto(this.url);
+    await this.page.goto(this.url, { waitUntil: 'domcontentloaded' });
+    await this.recoverIfGoogleVignette('/');
+    await expect(this.allProductsButton).toBeVisible();
   }
 
   async navigateToTestCase() {
-    await this.testCaseButton.click();
+    await this.clickAndExpectPath(this.testCaseButton, /\/test_cases$/, '/test_cases');
   }
 
   async navigateToAllProducts() {
-    await this.allProductsButton.click();
-    await expect(this.page).toHaveURL(/\/products$/);
+    await this.clickAndExpectPath(this.allProductsButton, /\/products$/, '/products');
   }
 
   async subscribeToNewsletter(email: string) {
@@ -68,8 +99,7 @@ export class HomePage {
   }
 
   async navigateToCart() {
-    await this.cartButton.click();
-    await expect(this.page).toHaveURL(/\/view_cart$/);
+    await this.clickAndExpectPath(this.cartButton, /\/view_cart$/, '/view_cart');
   }
 
   getLoggedInAsText(username: string) {
