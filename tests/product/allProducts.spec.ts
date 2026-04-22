@@ -17,7 +17,6 @@ test('All Products and first product page', async ({ page }) => {
     await homePage.navigateToAllProducts();
     await allProductsPage.assertAllProducts();
     await allProductsPage.navigateToFirstProduct();
-    await page.pause();
 
     const uiFirstProductDetails = await ProductDetailPage.prototype.getFirstProductDetails.call({ page });
 

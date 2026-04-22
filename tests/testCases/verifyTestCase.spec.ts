@@ -14,6 +14,4 @@ test('Verify Test Case Example', async ({ page }) => {
     await homePage.navigateToTestCase();
     await expect(page).toHaveURL(/\/test_cases$/);
     await expect(page.locator('b')).toHaveText('Test Cases');
-
-    await page.pause();
 });
