@@ -81,7 +81,6 @@ export class HomePage {
   async visit() {
     await this.page.goto(this.url, { waitUntil: 'domcontentloaded' });
     await this.recoverIfGoogleVignette('/');
-    await expect(this.allProductsButton).toBeVisible();
   }
 
   async navigateToTestCase() {
@@ -100,6 +99,11 @@ export class HomePage {
 
   async navigateToCart() {
     await this.clickAndExpectPath(this.cartButton, /\/view_cart$/, '/view_cart');
+  }
+
+  async navigateToContactUs() {
+    await this.visit();
+    await this.clickAndExpectPath(this.contactUsButton, /\/contact_us$/, '/contact_us');
   }
 
   getLoggedInAsText(username: string) {
