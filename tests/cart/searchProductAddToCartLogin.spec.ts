@@ -1,8 +1,8 @@
 import { test, expect, Page } from '@playwright/test';
-import { HomePage } from '../../pages/HomePage';
+import { HomePage } from '../../pages/homePage';
 import { AllProductsPage } from '../../pages/allProductsPage';
-import { LoginPage } from '../../pages/LoginPage';
-import { CartPage } from '../../pages/CartPage';
+import { LoginPage } from '../../pages/loginPage';
+import { CartPage } from '../../pages/cartPage';
 import { ProductDetailPage } from '../../pages/productPage';
 import testData from '../../data/testData.json';
 

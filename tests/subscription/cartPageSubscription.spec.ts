@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import { HomePage } from '../../pages/HomePage';
+import { HomePage } from '../../pages/homePage';
 import { CartPage } from '../../pages/cartPage';
 import testData from '../../data/testData.json';
 

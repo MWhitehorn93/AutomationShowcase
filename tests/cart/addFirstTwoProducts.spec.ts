@@ -1,7 +1,7 @@
 import { test, expect, Page } from '@playwright/test';
-import { HomePage } from '../../pages/HomePage';
+import { HomePage } from '../../pages/homePage';
 import { AllProductsPage } from '../../pages/allProductsPage';
-import { CartPage } from '../../pages/CartPage';
+import { CartPage } from '../../pages/cartPage';
 
 test.beforeEach(async ({ page }) => {
     const homePage = new HomePage(page);
