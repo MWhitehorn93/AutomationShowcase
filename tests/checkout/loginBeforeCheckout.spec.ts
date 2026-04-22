@@ -1,13 +1,10 @@
-import { test, expect, Page } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { HomePage } from '../../pages/HomePage';
 import { RegisterUserPage } from '../../pages/registerUserPage';
 import { LoginPage } from '../../pages/loginPage';
 import { AllProductsPage } from '../../pages/allProductsPage';
 import { CartPage } from '../../pages/cartPage';
 import testData from '../../data/testData.json';
-
-const registerUserName = 'TestUser';
-const registerUserEmail = `testuser_${Date.now()}@gmail.com`;
 
 test.beforeEach(async ({ page }) => {
     const homePage = new HomePage(page);
@@ -18,7 +15,6 @@ test.beforeEach(async ({ page }) => {
 test('Register Before Checkout', async ({ page }) => {
     const homePage = new HomePage(page);
     const loginPage = new LoginPage(page);
-    const registerPage = new RegisterUserPage(page);
     const allProductsPage = new AllProductsPage(page);
     const cartPage = new CartPage(page);
 

@@ -1,9 +1,7 @@
-import { test, expect, Page } from '@playwright/test';
+import { test } from '@playwright/test';
 import { HomePage } from '../../pages/HomePage';
 import { ContactUsPage } from '../../pages/contactUsPage';
 import testData from '../../data/testData.json';
-
-const registerUserName = 'TestUser';
 
 test.beforeEach(async ({ page }) => {
     const homePage = new HomePage(page);
