@@ -5,7 +5,7 @@ test.beforeEach(async ({ homePage }) => {
     await homePage.navigateToContactUs();
 });
 
-test('Test Case 6: Contact Us Form', async ({ homePage, contactUsPage, page }) => {
+test('Test Case 6: Contact Us Form', async ({contactUsPage}) => {
     await contactUsPage.contactUs(
         testData.contactUs.name,
         testData.contactUs.email,
