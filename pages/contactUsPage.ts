@@ -2,7 +2,6 @@ import { Page } from '@playwright/test';
 
 export class ContactUsPage {
     readonly page: Page;
-    readonly url = 'https://www.automationexercise.com/contact_us';
     readonly nameInput;
     readonly emailInput;
     readonly subjectInput;
