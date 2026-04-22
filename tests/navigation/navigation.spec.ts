@@ -4,8 +4,15 @@ test.beforeEach(async ({ homePage }) => {
     await homePage.visit();
 });
 
-test('Assert product categories', async ({ homePage }) => {
-    
+test('Test Case 7: Verify Test Case Example', async ({ homePage, page }) => {
+
+    await homePage.navigateToTestCase();
+    await expect(page).toHaveURL(/\/test_cases$/);
+    await expect(page.locator('b')).toHaveText('Test Cases');
+});
+
+
+test('Test Case 18: View Category products', async ({ homePage }) => {
     await expect(homePage.womenCategoryButton).toBeVisible();
     await homePage.womenCategoryButton.click();
     await expect(homePage.womenDressCategoryButton).toBeVisible();
@@ -16,8 +23,8 @@ test('Assert product categories', async ({ homePage }) => {
     await expect(homePage.meanJeansHeader).toBeVisible();
 });
 
-test('Assert brands', async ({ homePage, allProductsPage }) => {
 
+test('Test Case 19: View & Cart Brand Products', async ({ homePage, allProductsPage }) => {
     await homePage.poloBrandButton.click();
     await expect(allProductsPage.poloBrandHeader).toBeVisible();
     await homePage.mastAndHarborBrandButton.click();
