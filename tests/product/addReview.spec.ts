@@ -1,24 +1,16 @@
-import { test } from '@playwright/test';
-import { HomePage } from '../../pages/homePage';
-import { AllProductsPage } from '../../pages/allProductsPage';
+import { test } from '../../fixtures';
 import testData from '../../data/testData.json';
-import { ProductDetailPage } from '../../pages/productPage';
 
-test.beforeEach(async ({ page }) => {
-    const homePage = new HomePage(page);
-
+test.beforeEach(async ({ homePage }) => {
     await homePage.visit();
 });
 
-test('Add Review to a product', async ({ page }) => {
-    const homePage = new HomePage(page);
-    const allProductsPage = new AllProductsPage(page);
-    const productDetailPage = new ProductDetailPage(page);
+test('Add Review to a product', async ({ homePage, allProductsPage, productPage }) => {
 
 
     await homePage.navigateToAllProducts();
     await allProductsPage.navigateToFirstProduct();
-    await productDetailPage.writeReview(
+    await productPage.writeReview(
         testData.review.name,
         testData.review.email,
         testData.review.reviewText

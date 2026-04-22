@@ -1,24 +1,17 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../../pages/homePage';
-import { AllProductsPage } from '../../pages/allProductsPage';
+import { test, expect } from '../../fixtures';
 import testData from '../../data/testData.json';
-import { ProductDetailPage } from '../../pages/productPage';
 
-test.beforeEach(async ({ page }) => {
-    const homePage = new HomePage(page);
-
+test.beforeEach(async ({ homePage }) => {
     await homePage.visit();
 });
 
-test('All Products and first product page', async ({ page }) => {
-    const homePage = new HomePage(page);
-    const allProductsPage = new AllProductsPage(page);
+test('All Products and first product page', async ({ homePage, allProductsPage, productPage }) => {
 
     await homePage.navigateToAllProducts();
     await allProductsPage.assertAllProducts();
     await allProductsPage.navigateToFirstProduct();
 
-    const uiFirstProductDetails = await ProductDetailPage.prototype.getFirstProductDetails.call({ page });
+    const uiFirstProductDetails = await productPage.getFirstProductDetails();
 
     await expect(uiFirstProductDetails.name).toBe(testData.firstProduct.productName);
     await expect(uiFirstProductDetails.category).toBe(testData.firstProduct.category);

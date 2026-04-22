@@ -1,20 +1,14 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../../pages/homePage';
-import { LoginPage } from '../../pages/loginPage';
+import { test, expect } from '../../fixtures';
 import testData from '../../data/testData.json';
 
 const registerUserName = 'TestUser';
 
-test.beforeEach(async ({ page }) => {
-const homePage = new HomePage(page);
-
-  await homePage.visit();
+test.beforeEach(async ({ homePage }) => {
+    await homePage.visit();
 });
 
 
-test('Register User and Delete user', async ({ page }) => {
-  const homePage = new HomePage(page);
-  const loginPage = new LoginPage(page);
+test('Register User and Delete user', async ({ homePage, loginPage, page }) => {
   
   await homePage.homeLoginButton.click();
   await page.waitForURL(/\/login$/);

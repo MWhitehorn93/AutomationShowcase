@@ -1,15 +1,11 @@
-import { test } from '@playwright/test';
-import { HomePage } from '../../pages/homePage';
+import { test } from '../../fixtures';
 import testData from '../../data/testData.json';
 
-test.beforeEach(async ({ page }) => {
-const homePage = new HomePage(page);
-
-  await homePage.visit();
+test.beforeEach(async ({ homePage }) => {
+    await homePage.visit();
 });
 
-test('Verify subscription functionality on homepage', async ({ page }) => {
-    const homePage = new HomePage(page);
+test('Verify subscription functionality on homepage', async ({ homePage }) => {
     
     await homePage.subscribeToNewsletter(testData.emailSubscription.email);
 });

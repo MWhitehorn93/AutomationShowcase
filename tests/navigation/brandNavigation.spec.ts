@@ -1,16 +1,10 @@
-import { test, expect } from '@playwright/test';
-import { AllProductsPage } from '../../pages/allProductsPage';
-import { HomePage } from '../../pages/homePage';
+import { test, expect } from '../../fixtures';
 
-test.beforeEach(async ({ page }) => {
-    const homePage = new HomePage(page);
-
+test.beforeEach(async ({ homePage }) => {
     await homePage.visit();
 });
 
-test('Navigate to brands', async ({ page }) => {
-    const homePage = new HomePage(page);
-    const allProductsPage = new AllProductsPage(page);
+test('Navigate to brands', async ({ homePage, allProductsPage }) => {
 
     await homePage.poloBrandButton.click();
     await expect(allProductsPage.poloBrandHeader).toBeVisible();

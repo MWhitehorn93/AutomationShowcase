@@ -1,17 +1,11 @@
-import { test } from '@playwright/test';
-import { HomePage } from '../../pages/homePage';
-import { AllProductsPage } from '../../pages/allProductsPage';
+import { test } from '../../fixtures';
 import testData from '../../data/testData.json';
 
-test.beforeEach(async ({ page }) => {
-    const homePage = new HomePage(page);
-
+test.beforeEach(async ({ homePage }) => {
     await homePage.visit();
 });
 
-test('Single Search Product', async ({ page }) => {
-    const homePage = new HomePage(page);
-    const allProductsPage = new AllProductsPage(page);
+test('Single Search Product', async ({ homePage, allProductsPage }) => {
 
     await homePage.navigateToAllProducts();
     await allProductsPage.singleSearchProduct(testData.singleProduct.productName);

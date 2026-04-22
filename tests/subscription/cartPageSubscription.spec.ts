@@ -1,17 +1,11 @@
-import { test } from '@playwright/test';
-import { HomePage } from '../../pages/homePage';
-import { CartPage } from '../../pages/cartPage';
+import { test } from '../../fixtures';
 import testData from '../../data/testData.json';
 
-test.beforeEach(async ({ page }) => {
-const homePage = new HomePage(page);
-
-  await homePage.visit();
+test.beforeEach(async ({ homePage }) => {
+    await homePage.visit();
 });
 
-test('Verify subscription functionality on homepage', async ({ page }) => {
-    const homePage = new HomePage(page);
-    const cartPage = new CartPage(page);
+test('Verify subscription functionality on cart page', async ({ homePage, cartPage }) => {
 
     await homePage.navigateToCart();
     await cartPage.subscribeToNewsletter(testData.emailSubscription.email);

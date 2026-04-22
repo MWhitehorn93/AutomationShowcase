@@ -1,15 +1,10 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../../pages/homePage';
+import { test, expect } from '../../fixtures';
 
-test.beforeEach(async ({ page }) => {
-const homePage = new HomePage(page);
-
-
-  await homePage.visit();
+test.beforeEach(async ({ homePage }) => {
+    await homePage.visit();
 });
 
-test('Verify Test Case Example', async ({ page }) => {
-    const homePage = new HomePage(page);
+test('Verify Test Case Example', async ({ homePage, page }) => {
 
     await homePage.navigateToTestCase();
     await expect(page).toHaveURL(/\/test_cases$/);

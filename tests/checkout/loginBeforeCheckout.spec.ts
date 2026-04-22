@@ -1,21 +1,11 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../../pages/homePage';
-import { LoginPage } from '../../pages/loginPage';
-import { AllProductsPage } from '../../pages/allProductsPage';
-import { CartPage } from '../../pages/cartPage';
+import { test, expect } from '../../fixtures';
 import testData from '../../data/testData.json';
 
-test.beforeEach(async ({ page }) => {
-    const homePage = new HomePage(page);
-
+test.beforeEach(async ({ homePage }) => {
     await homePage.visit();
 });
 
-test('Register Before Checkout', async ({ page }) => {
-    const homePage = new HomePage(page);
-    const loginPage = new LoginPage(page);
-    const allProductsPage = new AllProductsPage(page);
-    const cartPage = new CartPage(page);
+test('Login Before Checkout', async ({ homePage, loginPage, allProductsPage, cartPage, page }) => {
 
     await homePage.homeLoginButton.click();
     await page.waitForURL(/\/login$/);

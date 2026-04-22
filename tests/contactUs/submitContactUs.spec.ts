@@ -1,17 +1,11 @@
-import { test } from '@playwright/test';
-import { HomePage } from '../../pages/homePage';
-import { ContactUsPage } from '../../pages/contactUsPage';
+import { test } from '../../fixtures';
 import testData from '../../data/testData.json';
 
-test.beforeEach(async ({ page }) => {
-    const homePage = new HomePage(page);
-
+test.beforeEach(async ({ homePage }) => {
     await homePage.visit();
 });
 
-test('Register User and Delete user', async ({ page }) => {
-    const homePage = new HomePage(page);
-    const contactUsPage = new ContactUsPage(page);
+test('Submit Contact Us Form', async ({ homePage, contactUsPage, page }) => {
 
     await homePage.contactUsButton.click();
     await page.waitForURL(/\/contact_us$/);

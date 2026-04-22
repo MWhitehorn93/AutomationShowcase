@@ -1,18 +1,11 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../../pages/homePage';
-import { LoginPage } from '../../pages/loginPage';
+import { test, expect } from '../../fixtures';
 import testData from '../../data/testData.json';
 
-test.beforeEach(async ({ page }) => {
-    const homePage = new HomePage(page);
-
+test.beforeEach(async ({ homePage }) => {
     await homePage.visit();
 });
 
-test('Incorrect Log In Attempt', async ({ page }) => {
-    const homePage = new HomePage(page);
-    const loginPage = new LoginPage(page);
-   
+test('Incorrect Log In Attempt', async ({ homePage, loginPage, page }) => {
     await homePage.homeLoginButton.click();
     await page.waitForURL(/\/login$/);
     await loginPage.loginUser(testData.incorrectUser.email, testData.incorrectUser.password);
