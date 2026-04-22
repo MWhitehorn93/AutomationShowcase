@@ -83,6 +83,11 @@ export class HomePage {
     await this.recoverIfGoogleVignette('/');
   }
 
+  async navigateToLoginPage() {
+    await this.visit();
+    await this.clickAndExpectPath(this.homeLoginButton, /\/login$/, '/login');
+  }
+
   async navigateToTestCase() {
     await this.clickAndExpectPath(this.testCaseButton, /\/test_cases$/, '/test_cases');
   }
