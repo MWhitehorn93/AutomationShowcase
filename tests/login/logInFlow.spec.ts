@@ -6,7 +6,6 @@ test.beforeEach(async ({ homePage }) => {
 });
 
 test('Test Case 2: Log in User with correct email and password ', async ({ homePage, loginPage, page }) => {
-
     await loginPage.loginUser(testData.loginUser.email, testData.loginUser.password);
     await expect(homePage.getLoggedInAsText(testData.loginUser.userName)).toBeVisible();
     await homePage.homeLogOutButton.click();
