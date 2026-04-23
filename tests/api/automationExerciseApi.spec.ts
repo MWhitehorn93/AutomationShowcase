@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import testData from '../../data/testData.json';
-import { deleteAccountIfExists, parseApiResponse } from './apiFixtures';
+import { deleteAccountIfExists, parseApiResponse } from '../../fixtures/apiFixtures';
 
 test.describe.serial('AutomationExercise API List Scenarios', () => {
   let lifecycleEmail = '';

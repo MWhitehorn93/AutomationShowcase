@@ -1,4 +1,4 @@
-import { test } from '../../../fixtures';
+import { test } from '../../../fixtures/fixtures';
 import testData from '../../../data/testData.json';
 
 test.beforeEach(async ({ homePage }) => {

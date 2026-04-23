@@ -1,4 +1,4 @@
-import { test, expect } from '../../../fixtures';
+import { test, expect } from '../../../fixtures/fixtures';
 import testData from '../../../data/testData.json';
 
 test.beforeEach(async ({ homePage }) => {
