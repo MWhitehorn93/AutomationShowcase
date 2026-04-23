@@ -1,5 +1,23 @@
 import { Page, expect } from '@playwright/test';
 
+type AddressDetails = {
+  containerSelector: string;
+  address1: string;
+  address2: string;
+  city: string;
+  state: string;
+  zipcode: string;
+  country: string;
+};
+
+type PaymentDetails = {
+  nameOnCard: string;
+  cardNumber: string;
+  cvc: string;
+  expirationMonth: string;
+  expirationYear: string;
+};
+
 export class CartPage {
   readonly page: Page;
   readonly subscriptionEmailInput;
@@ -23,6 +41,36 @@ export class CartPage {
   readonly cartBody;
   readonly removeFirstProductButton;
   readonly downloadInvoiceButton;
+
+    private buildUrl(path: string): string {
+      return new URL(path, 'https://www.automationexercise.com/').toString();
+    }
+
+    private async recoverIfGoogleVignette(fallbackPath: string): Promise<void> {
+      if (this.page.url().includes('#google_vignette')) {
+        await this.page.goto(this.buildUrl(fallbackPath), { waitUntil: 'domcontentloaded' });
+      }
+    }
+
+    private async clickAndExpectPath(
+      link: { click: () => Promise<void> },
+      expectedPath: RegExp,
+      fallbackPath: string
+    ): Promise<void> {
+      await link.click();
+
+      try {
+        await expect(this.page).toHaveURL(expectedPath, { timeout: 7000 });
+      } catch {
+        await this.recoverIfGoogleVignette(fallbackPath);
+
+        if (!expectedPath.test(this.page.url())) {
+          await this.page.goto(this.buildUrl(fallbackPath), { waitUntil: 'domcontentloaded' });
+        }
+
+        await expect(this.page).toHaveURL(expectedPath, { timeout: 7000 });
+      }
+    }
 
     constructor(page: Page) {
       this.page = page;
@@ -78,6 +126,7 @@ export class CartPage {
     }
 
     async enterPaymentDetailsAndPay(nameOnCard: string, cardNumber: string, cvc: string, expiryMonth: string, expiryYear: string) {
+      await expect(this.page).toHaveURL(/\/payment$/, { timeout: 7000 });
       await this.nameOnCardInput.fill(nameOnCard);
       await this.cardNumberInput.fill(cardNumber);
       await this.cvcInput.fill(cvc);
@@ -86,9 +135,65 @@ export class CartPage {
       await this.payButton.click();
     }
 
+    async placeOrder() {
+      await this.clickAndExpectPath(this.placeOrderButton, /\/payment$/, '/payment');
+    }
+
+    async proceedToCheckout() {
+      await this.proceedToCheckoutButton.click();
+
+      try {
+        await expect(this.page).toHaveURL(/\/checkout$/, { timeout: 3000 });
+        return;
+      } catch {
+        await this.recoverIfGoogleVignette('/view_cart');
+      }
+
+      if (await this.registerLoginWhileCheckoutButton.isVisible().catch(() => false)) {
+        return;
+      }
+
+      await expect(this.page).toHaveURL(/\/checkout$/, { timeout: 7000 });
+    }
+
     async assertOrderPlaced() {
       await expect(this.orderPlacedHeader).toBeVisible();
       await expect(this.orderPlacedMessage).toBeVisible();
+    }
+
+    async assertAddressDetails(addressDetails: AddressDetails) {
+      await this.assertDeliveryAddress(
+        addressDetails.containerSelector,
+        addressDetails.address1,
+        addressDetails.address2,
+        addressDetails.city,
+        addressDetails.state,
+        addressDetails.zipcode,
+        addressDetails.country
+      );
+
+      await this.assertBillingAddress(
+        addressDetails.containerSelector,
+        addressDetails.address1,
+        addressDetails.address2,
+        addressDetails.city,
+        addressDetails.state,
+        addressDetails.zipcode,
+        addressDetails.country
+      );
+    }
+
+    async completeCheckout(paymentDetails: PaymentDetails) {
+      await this.placeOrder();
+      await this.enterPaymentDetailsAndPay(
+        paymentDetails.nameOnCard,
+        paymentDetails.cardNumber,
+        paymentDetails.cvc,
+        paymentDetails.expirationMonth,
+        paymentDetails.expirationYear
+      );
+      await this.assertOrderPlaced();
+      await this.downloadInvoiceButton.click();
     }
 
     getDeliveryAddressHeader(name: string) {

@@ -9,6 +9,10 @@ import { ContactUsPage } from './pages/contactUsPage';
 import { TestCase } from './pages/testCasesPage';
 
 type PageObjects = {
+  generatedUser: {
+    name: string;
+    email: string;
+  };
   homePage: HomePage;
   loginPage: LoginPage;
   cartPage: CartPage;
@@ -20,6 +24,42 @@ type PageObjects = {
 };
 
 export const test = base.extend<PageObjects>({
+  generatedUser: async ({}, use) => {
+    await use({
+      name: 'TestUser',
+      email: `testuser_${Date.now()}_${Math.random().toString(36).slice(2, 8)}@gmail.com`
+    });
+  },
+
+  page: async ({ page }, use) => {
+    const blockedPatterns = [
+      /googlesyndication\.com/i,
+      /doubleclick\.net/i,
+      /googleadservices\.com/i,
+      /mediago\.io/i,
+      /adservice\.google\.com/i
+    ];
+
+    await page.route('**/*', route => {
+      const requestUrl = route.request().url();
+      if (blockedPatterns.some(pattern => pattern.test(requestUrl))) {
+        return route.abort();
+      }
+
+      return route.continue();
+    });
+
+    page.on('dialog', async dialog => {
+      await dialog.dismiss();
+    });
+
+    await page.addInitScript(() => {
+      window.open = () => null;
+    });
+
+    await use(page);
+  },
+
   homePage: async ({ page }, use) => {
     const homePage = new HomePage(page);
     await use(homePage);
