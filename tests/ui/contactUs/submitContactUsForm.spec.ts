@@ -1,5 +1,5 @@
-import { test } from '../../fixtures';
-import testData from '../../data/testData.json';
+import { test } from '../../../fixtures';
+import testData from '../../../data/testData.json';
 
 test.beforeEach(async ({ homePage }) => {
     await homePage.navigateToContactUs();
