@@ -1,12 +1,12 @@
 import { test as base, Page } from '@playwright/test';
-import { HomePage } from './pages/homePage';
-import { LoginPage } from './pages/loginPage';
-import { CartPage } from './pages/cartPage';
-import { RegisterUserPage } from './pages/registerUserPage';
-import { AllProductsPage } from './pages/allProductsPage';
-import { ProductDetailPage } from './pages/productPage';
-import { ContactUsPage } from './pages/contactUsPage';
-import { TestCasePage } from './pages/testCasesPage';
+import { HomePage } from '../pages/homePage';
+import { LoginPage } from '../pages/loginPage';
+import { CartPage } from '../pages/cartPage';
+import { RegisterUserPage } from '../pages/registerUserPage';
+import { AllProductsPage } from '../pages/allProductsPage';
+import { ProductDetailPage } from '../pages/productPage';
+import { ContactUsPage } from '../pages/contactUsPage';
+import { TestCasePage } from '../pages/testCasesPage';
 
 type PageObjects = {
   generatedUser: {

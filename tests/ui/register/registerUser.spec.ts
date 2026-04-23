@@ -1,5 +1,5 @@
-import { test, expect } from '../../fixtures';
-import testData from '../../data/testData.json';
+import { test, expect } from '../../../fixtures/fixtures';
+import testData from '../../../data/testData.json';
 
 const registerUserName = 'TestUser';
 const registerUserEmail = `testuser_${Date.now()}@gmail.com`;

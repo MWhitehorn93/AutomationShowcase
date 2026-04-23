@@ -93,6 +93,7 @@ export class HomePage {
   }
 
   async navigateToAllProducts() {
+    await this.visit();
     await this.clickAndExpectPath(this.allProductsButton, /\/products$/, '/products');
   }
 
