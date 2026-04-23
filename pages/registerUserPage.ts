@@ -2,13 +2,10 @@ import { Page, expect } from '@playwright/test';
 
 export class RegisterUserPage {
   readonly page: Page;
-  readonly mrRadioButton;
   readonly passwordInput;
   readonly daysDropdown;
   readonly monthsDropdown;
   readonly yearsDropdown;
-  readonly newsletterCheckbox;
-  readonly offersCheckbox;
   readonly firstNameInput;
   readonly lastNameInput;
   readonly companyInput;    
@@ -29,13 +26,10 @@ export class RegisterUserPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.mrRadioButton = page.getByRole('radio', { name: 'Mr.' });
     this.passwordInput = page.getByRole('textbox', { name: 'Password *' });
     this.daysDropdown = page.locator('#days');
     this.monthsDropdown = page.locator('#months');
     this.yearsDropdown = page.locator('#years');
-    this.newsletterCheckbox = page.locator('div').filter({ hasText: 'Sign up for our newsletter!' }).nth(4);
-    this.offersCheckbox = page.getByRole('checkbox', { name: 'Receive special offers from' });
     this.firstNameInput = page.getByRole('textbox', { name: 'First name *' });
     this.lastNameInput = page.getByRole('textbox', { name: 'Last name *' });
     this.companyInput = page.getByRole('textbox', { name: 'Company', exact: true });

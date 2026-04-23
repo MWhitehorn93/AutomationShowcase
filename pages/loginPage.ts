@@ -2,8 +2,6 @@ import { Page } from '@playwright/test';
 
 export class LoginPage {
   readonly page: Page;
-  readonly url = 'https://www.automationexercise.com/';
-  readonly homeLoginButton;
   readonly registerUserNameInput;
   readonly registerUserEmailInput;
   readonly registerUserButton;
@@ -15,7 +13,6 @@ export class LoginPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.homeLoginButton = page.getByRole('link', { name: ' Signup / Login' });
     this.registerUserNameInput = page.getByRole('textbox', { name: 'Name' });
     this.registerUserEmailInput = page.locator('form').filter({ hasText: 'Signup' }).getByPlaceholder('Email Address');
     this.registerUserButton = page.getByRole('button', { name: 'Signup' });
@@ -25,10 +22,6 @@ export class LoginPage {
     this.loginErrorMessage = page.getByText('Your email or password is');
     this.existingEmailErrorMessage = page.getByText('Email Address already exist!');
 
-  }
-
-  async visit() {
-    await this.page.goto(this.url);
   }
 
   async registerUser(name: string, email: string) {

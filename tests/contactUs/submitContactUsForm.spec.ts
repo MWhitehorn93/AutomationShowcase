@@ -2,13 +2,10 @@ import { test } from '../../fixtures';
 import testData from '../../data/testData.json';
 
 test.beforeEach(async ({ homePage }) => {
-    await homePage.visit();
+    await homePage.navigateToContactUs();
 });
 
-test('Submit Contact Us Form', async ({ homePage, contactUsPage, page }) => {
-
-    await homePage.contactUsButton.click();
-    await page.waitForURL(/\/contact_us$/);
+test('Test Case 6: Contact Us Form', async ({contactUsPage}) => {
     await contactUsPage.contactUs(
         testData.contactUs.name,
         testData.contactUs.email,
@@ -16,5 +13,4 @@ test('Submit Contact Us Form', async ({ homePage, contactUsPage, page }) => {
         testData.contactUs.message,
         testData.contactUs.filePath
     );
-    
 })
