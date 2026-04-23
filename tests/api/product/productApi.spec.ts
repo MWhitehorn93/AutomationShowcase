@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import testData from '../../../data/testData.json';
 import {
   getAllProductsList,
   postProductsList,
@@ -8,14 +9,16 @@ import {
 import { parseApiResponse } from '../../../fixtures/apiFixtures';
 import { API_RESPONSE_CODES, API_RESPONSE_MESSAGES } from '../../../apiSrc/apiRepsonse';
 
-const SEARCH_PRODUCT = 'top';
+const SEARCH_PRODUCT = testData.singleProduct.productName;
+const EXPECTED_SEARCH_RESULTS = testData.apiResponses.productsList.filter(
+  product => product.name === SEARCH_PRODUCT
+);
 
   test('API 1: GET all products list', async ({ request }) => {
     const body = await getAllProductsList(request);
 
     expect(body.responseCode).toBe(API_RESPONSE_CODES.success);
-    expect(Array.isArray(body.products)).toBeTruthy();
-    expect(body.products?.length).toBeGreaterThan(0);
+    expect(body.products).toEqual(testData.apiResponses.productsList);
   });
 
   test('API 2: POST to products list should be unsupported', async ({ request }) => {
@@ -29,8 +32,7 @@ const SEARCH_PRODUCT = 'top';
     const body = await searchProducts(request, SEARCH_PRODUCT);
 
     expect(body.responseCode).toBe(API_RESPONSE_CODES.success);
-    expect(Array.isArray(body.products)).toBeTruthy();
-    expect(body.products?.length).toBeGreaterThan(0);
+    expect(body.products).toEqual(EXPECTED_SEARCH_RESULTS);
   });
 
   test('API 6: POST search product without search_product should be bad request', async ({ request }) => {
