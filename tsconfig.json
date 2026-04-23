@@ -17,7 +17,7 @@
     "pages/**/*.ts",
     "tests/**/*.ts",
     "data/**/*.json"
-, "fixtures/apiFixtures.ts"  ],
+, "fixtures/apiFixtures.ts", "apiClient/apiClient.ts"  ],
   "exclude": [
     "node_modules",
     "playwright-report",
