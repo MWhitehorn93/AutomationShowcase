@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
 import testData from '../../../data/testData.json';
 import { parseApiResponse } from '../../../fixtures/apiFixtures';
-import { API_ENDPOINTS } from '../../../apiClient/apiClient';
+import { API_ENDPOINTS } from '../../../apiSrc/apiClient';
+import { API_RESPONSE_CODES, API_RESPONSE_MESSAGES } from '../../../apiSrc/apiRepsonse';
 
     test('API 7: POST verify login with valid details', async ({ request }) => {
         const response = await request.post(API_ENDPOINTS.verifyLogin, {
@@ -12,8 +13,8 @@ import { API_ENDPOINTS } from '../../../apiClient/apiClient';
         });
         const body = await parseApiResponse(response);
 
-        expect(body.responseCode).toBe(200);
-        expect(body.message).toBe('User exists!');
+        expect(body.responseCode).toBe(API_RESPONSE_CODES.success);
+        expect(body.message).toBe(API_RESPONSE_MESSAGES.userExists);
     });
 
     test('API 8: POST verify login without email should be bad request', async ({ request }) => {
@@ -22,8 +23,8 @@ import { API_ENDPOINTS } from '../../../apiClient/apiClient';
         });
         const body = await parseApiResponse(response);
 
-        expect(body.responseCode).toBe(400);
-        expect(body.message).toBe('Bad request, email or password parameter is missing in POST request.');
+        expect(body.responseCode).toBe(API_RESPONSE_CODES.badRequest);
+        expect(body.message).toBe(API_RESPONSE_MESSAGES.emailOrPasswordMissing);
     });
 
     test('API 9: DELETE verify login should be unsupported', async ({ request }) => {
@@ -32,8 +33,8 @@ import { API_ENDPOINTS } from '../../../apiClient/apiClient';
         });
         const body = await parseApiResponse(response);
 
-        expect(body.responseCode).toBe(405);
-        expect(body.message).toBe('This request method is not supported.');
+        expect(body.responseCode).toBe(API_RESPONSE_CODES.methodNotAllowed);
+        expect(body.message).toBe(API_RESPONSE_MESSAGES.methodNotSupported);
     });
 
     test('API 10: POST verify login with invalid details', async ({ request }) => {
@@ -45,6 +46,6 @@ import { API_ENDPOINTS } from '../../../apiClient/apiClient';
         });
         const body = await parseApiResponse(response);
 
-        expect(body.responseCode).toBe(404);
-        expect(body.message).toBe('User not found!');
+        expect(body.responseCode).toBe(API_RESPONSE_CODES.notFound);
+        expect(body.message).toBe(API_RESPONSE_MESSAGES.userNotFound);
     });

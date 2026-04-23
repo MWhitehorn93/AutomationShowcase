@@ -4,24 +4,16 @@ import {
   postProductsList,
   searchProducts,
   API_ENDPOINTS
-} from '../../../apiClient/apiClient';
+} from '../../../apiSrc/apiClient';
 import { parseApiResponse } from '../../../fixtures/apiFixtures';
-
-const RESPONSE_CODES = {
-  success: 200,
-  methodNotAllowed: 405
-} as const;
-
-const RESPONSE_MESSAGES = {
-  methodNotSupported: 'This request method is not supported.'
-} as const;
+import { API_RESPONSE_CODES, API_RESPONSE_MESSAGES } from '../../../apiSrc/apiRepsonse';
 
 const SEARCH_PRODUCT = 'top';
 
   test('API 1: GET all products list', async ({ request }) => {
     const body = await getAllProductsList(request);
 
-    expect(body.responseCode).toBe(RESPONSE_CODES.success);
+    expect(body.responseCode).toBe(API_RESPONSE_CODES.success);
     expect(Array.isArray(body.products)).toBeTruthy();
     expect(body.products?.length).toBeGreaterThan(0);
   });
@@ -29,14 +21,14 @@ const SEARCH_PRODUCT = 'top';
   test('API 2: POST to products list should be unsupported', async ({ request }) => {
     const body = await postProductsList(request);
 
-    expect(body.responseCode).toBe(RESPONSE_CODES.methodNotAllowed);
-    expect(body.message).toBe(RESPONSE_MESSAGES.methodNotSupported);
+    expect(body.responseCode).toBe(API_RESPONSE_CODES.methodNotAllowed);
+    expect(body.message).toBe(API_RESPONSE_MESSAGES.methodNotSupported);
   });
 
   test('API 5: POST search product', async ({ request }) => {
     const body = await searchProducts(request, SEARCH_PRODUCT);
 
-    expect(body.responseCode).toBe(RESPONSE_CODES.success);
+    expect(body.responseCode).toBe(API_RESPONSE_CODES.success);
     expect(Array.isArray(body.products)).toBeTruthy();
     expect(body.products?.length).toBeGreaterThan(0);
   });
@@ -45,6 +37,6 @@ const SEARCH_PRODUCT = 'top';
     const response = await request.post(API_ENDPOINTS.searchProduct);
     const body = await parseApiResponse(response);
 
-    expect(body.responseCode).toBe(400);
-    expect(body.message).toBe('Bad request, search_product parameter is missing in POST request.');
+    expect(body.responseCode).toBe(API_RESPONSE_CODES.badRequest);
+    expect(body.message).toBe(API_RESPONSE_MESSAGES.searchProductMissing);
   });

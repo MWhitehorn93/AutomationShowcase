@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
 import testData from '../../../data/testData.json';
 import { deleteAccountIfExists, parseApiResponse } from '../../../fixtures/apiFixtures';
-import { API_ENDPOINTS } from '../../../apiClient/apiClient';
+import { API_ENDPOINTS } from '../../../apiSrc/apiClient';
+import { API_RESPONSE_CODES, API_RESPONSE_MESSAGES } from '../../../apiSrc/apiRepsonse';
 
 test.describe.serial('AutomationExercise API List Scenarios', () => {
   let lifecycleEmail = '';
@@ -39,8 +40,8 @@ test.describe.serial('AutomationExercise API List Scenarios', () => {
     });
     const createBody = await parseApiResponse(createResponse);
 
-    expect(createBody.responseCode).toBe(201);
-    expect(createBody.message).toBe('User created!');
+    expect(createBody.responseCode).toBe(API_RESPONSE_CODES.created);
+    expect(createBody.message).toBe(API_RESPONSE_MESSAGES.userCreated);
   });
 
   test('API 14: GET user account detail by email', async ({ request }) => {
@@ -51,7 +52,7 @@ test.describe.serial('AutomationExercise API List Scenarios', () => {
     });
     const getDetailBody = await parseApiResponse(getDetailResponse);
 
-    expect(getDetailBody.responseCode).toBe(200);
+    expect(getDetailBody.responseCode).toBe(API_RESPONSE_CODES.success);
     expect(getDetailBody.user).toBeTruthy();
     expect(getDetailBody.user?.email).toBe(lifecycleEmail);
   });
@@ -71,8 +72,8 @@ test.describe.serial('AutomationExercise API List Scenarios', () => {
     });
     const updateBody = await parseApiResponse(updateResponse);
 
-    expect(updateBody.responseCode).toBe(200);
-    expect(updateBody.message).toBe('User updated!');
+    expect(updateBody.responseCode).toBe(API_RESPONSE_CODES.success);
+    expect(updateBody.message).toBe(API_RESPONSE_MESSAGES.userUpdated);
   });
 
   test('API 12: DELETE user account', async ({ request }) => {
@@ -87,7 +88,7 @@ test.describe.serial('AutomationExercise API List Scenarios', () => {
     });
     const deleteBody = await parseApiResponse(deleteResponse);
 
-    expect(deleteBody.responseCode).toBe(200);
-    expect(deleteBody.message).toBe('Account deleted!');
+    expect(deleteBody.responseCode).toBe(API_RESPONSE_CODES.success);
+    expect(deleteBody.message).toBe(API_RESPONSE_MESSAGES.accountDeleted);
   });
 });
