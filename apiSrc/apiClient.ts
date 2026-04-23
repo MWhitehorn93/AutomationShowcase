@@ -22,6 +22,16 @@ export async function postProductsList(request: APIRequestContext): Promise<ApiR
   return parseApiResponse(response);
 }
 
+export async function getAllBrandsList(request: APIRequestContext): Promise<ApiResponseBody> {
+  const response = await request.get(API_ENDPOINTS.brandsList);
+  return parseApiResponse(response);
+}
+
+export async function putBrandsList(request: APIRequestContext): Promise<ApiResponseBody> {
+  const response = await request.put(API_ENDPOINTS.brandsList);
+  return parseApiResponse(response);
+}
+
 export async function searchProducts(
   request: APIRequestContext,
   searchProduct: string
