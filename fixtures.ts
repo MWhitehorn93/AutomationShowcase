@@ -6,7 +6,7 @@ import { RegisterUserPage } from './pages/registerUserPage';
 import { AllProductsPage } from './pages/allProductsPage';
 import { ProductDetailPage } from './pages/productPage';
 import { ContactUsPage } from './pages/contactUsPage';
-import { TestCase } from './pages/testCasesPage';
+import { TestCasePage } from './pages/testCasesPage';
 
 type PageObjects = {
   generatedUser: {
@@ -20,7 +20,7 @@ type PageObjects = {
   allProductsPage: AllProductsPage;
   productPage: ProductDetailPage;
   contactUsPage: ContactUsPage;
-  testCasePage: TestCase;
+  testCasePage: TestCasePage;
 };
 
 export const test = base.extend<PageObjects>({
@@ -96,7 +96,7 @@ export const test = base.extend<PageObjects>({
   },
 
   testCasePage: async ({ page }, use) => {
-    const testCasePage = new TestCase(page);
+    const testCasePage = new TestCasePage(page);
     await use(testCasePage);
   },
 });

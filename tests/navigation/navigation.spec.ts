@@ -4,9 +4,9 @@ test.beforeEach(async ({ homePage }) => {
     await homePage.visit();
 });
 
-test('Test Case 7: Verify Test Case Example', async ({ homePage, page }) => {
+test('Test Case 7: Verify Test Case Example', async ({ homePage, testCasePage }) => {
     await homePage.navigateToTestCase();
-    await expect(page.locator('b')).toHaveText('Test Cases');
+    await expect(testCasePage.testCaseTitle).toHaveText('Test Cases');
 });
 
 

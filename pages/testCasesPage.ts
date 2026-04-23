@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 
-export class TestCase {
+export class TestCasePage {
     readonly page: Page;
     readonly testCaseTitle;
 

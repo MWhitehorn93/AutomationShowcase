@@ -37,7 +37,6 @@ export class CartPage {
   readonly payButton;
   readonly orderPlacedHeader;
   readonly orderPlacedMessage;
-  readonly addressBox;
   readonly cartBody;
   readonly removeFirstProductButton;
   readonly downloadInvoiceButton;
@@ -91,7 +90,6 @@ export class CartPage {
       this.payButton = page.getByRole('button', { name: 'Pay and Confirm Order' });
       this.orderPlacedHeader = page.getByText('Order Placed!');
       this.orderPlacedMessage = page.getByText('Congratulations! Your order');
-      this.addressBox = page.getByText('Your delivery address . Josh');
       this.cartBody = page.locator('#cart_info');
       this.removeFirstProductButton = page.locator('.cart_quantity_delete').first();
       this.downloadInvoiceButton = page.getByRole('link', { name: 'Download Invoice' });
