@@ -92,7 +92,7 @@
     "email": "whitehornmatthewetoro+reviewTest@gmail.com",
     "reviewText": "This is a review for this product. It works great!"
   },
-  "apiResponses": {
+  "apiData": {
     "productsList": [
       {
         "id": 1,
@@ -539,5 +539,30 @@
       { "id": 42, "brand": "Mast & Harbour" },
       { "id": 43, "brand": "Mast & Harbour" }
     ]
+  }, 
+  "accountApi": {
+    "emailPrefix": "apitest",
+    "registration": {
+      "password": "P@ssword123",
+      "name": "API Test User",
+      "title": "Mr",
+      "birth_date": "10",
+      "birth_month": "5",
+      "birth_year": "1993",
+      "firstname": "API",
+      "lastname": "Tester",
+      "company": "Automation Showcase",
+      "address1": "123 Main Street",
+      "address2": "Apt 4B",
+      "country": "Canada",
+      "zipcode": "M4B1B3",
+      "state": "Ontario",
+      "city": "Toronto",
+      "mobile_number": "5551234567"
+    },
+    "update": {
+      "name": "API Test User Updated",
+      "city": "Ottawa"
+    }
   }
 }

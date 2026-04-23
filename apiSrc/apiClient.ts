@@ -72,3 +72,50 @@ export async function deleteVerifyLogin(request: APIRequestContext): Promise<Api
 
   return parseApiResponse(response);
 }
+
+export async function createAccount(
+  request: APIRequestContext,
+  payload: Record<string, string>
+): Promise<ApiResponseBody> {
+  const response = await request.post(API_ENDPOINTS.createAccount, {
+    form: payload
+  });
+
+  return parseApiResponse(response);
+}
+
+export async function getUserDetailByEmail(
+  request: APIRequestContext,
+  email: string
+): Promise<ApiResponseBody> {
+  const response = await request.get(API_ENDPOINTS.getUserDetailByEmail, {
+    params: { email }
+  });
+
+  return parseApiResponse(response);
+}
+
+export async function updateAccount(
+  request: APIRequestContext,
+  payload: Record<string, string>
+): Promise<ApiResponseBody> {
+  const response = await request.fetch(API_ENDPOINTS.updateAccount, {
+    method: 'PUT',
+    form: payload
+  });
+
+  return parseApiResponse(response);
+}
+
+export async function deleteAccount(
+  request: APIRequestContext,
+  email: string,
+  password: string
+): Promise<ApiResponseBody> {
+  const response = await request.fetch(API_ENDPOINTS.deleteAccount, {
+    method: 'DELETE',
+    form: { email, password }
+  });
+
+  return parseApiResponse(response);
+}

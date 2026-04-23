@@ -10,7 +10,7 @@ import {
       const body = await getAllBrandsList(request);
 
       expect(body.responseCode).toBe(API_RESPONSE_CODES.success);
-      expect(body.brands).toEqual(testData.apiResponses.brandsList);
+      expect(body.brands).toEqual(testData.apiData.brandsList);
     });
 
     test('API 4: PUT to brands list should be unsupported', async ({ request }) => {

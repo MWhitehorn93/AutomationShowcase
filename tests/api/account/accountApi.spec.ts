@@ -1,8 +1,10 @@
 import { test, expect } from '@playwright/test';
 import testData from '../../../data/testData.json';
-import { deleteAccountIfExists, parseApiResponse } from '../../../fixtures/apiFixtures';
-import { API_ENDPOINTS } from '../../../apiSrc/apiClient';
+import { deleteAccountIfExists } from '../../../fixtures/apiFixtures';
+import { createAccount, getUserDetailByEmail, updateAccount, deleteAccount } from '../../../apiSrc/apiClient';
 import { API_RESPONSE_CODES, API_RESPONSE_MESSAGES } from '../../../apiSrc/apiRepsonse';
+
+const ACCOUNT_API_DATA = testData.accountApi;
 
 test.describe.serial('AutomationExercise API List Scenarios', () => {
   let lifecycleEmail = '';
@@ -10,35 +12,18 @@ test.describe.serial('AutomationExercise API List Scenarios', () => {
   let lifecyclePayload: Record<string, string> = {};
 
   test('API 11: POST create/register user account', async ({ request }) => {
-    lifecycleEmail = `apitest_${Date.now()}_${Math.random().toString(36).slice(2, 7)}@example.com`;
-    lifecyclePassword = 'P@ssword123';
+    lifecycleEmail = `${ACCOUNT_API_DATA.emailPrefix}_${Date.now()}_${Math.random().toString(36).slice(2, 7)}@example.com`;
+    lifecyclePassword = ACCOUNT_API_DATA.registration.password;
 
     lifecyclePayload = {
-      name: 'API Test User',
+      ...ACCOUNT_API_DATA.registration,
       email: lifecycleEmail,
-      password: lifecyclePassword,
-      title: 'Mr',
-      birth_date: '10',
-      birth_month: '5',
-      birth_year: '1993',
-      firstname: 'API',
-      lastname: 'Tester',
-      company: 'Automation Showcase',
-      address1: '123 Main Street',
-      address2: 'Apt 4B',
-      country: 'Canada',
-      zipcode: 'M4B1B3',
-      state: 'Ontario',
-      city: 'Toronto',
-      mobile_number: '5551234567'
+      password: lifecyclePassword
     };
 
     await deleteAccountIfExists(request, lifecycleEmail, lifecyclePassword);
 
-    const createResponse = await request.post(API_ENDPOINTS.createAccount, {
-      form: lifecyclePayload
-    });
-    const createBody = await parseApiResponse(createResponse);
+    const createBody = await createAccount(request, lifecyclePayload);
 
     expect(createBody.responseCode).toBe(API_RESPONSE_CODES.created);
     expect(createBody.message).toBe(API_RESPONSE_MESSAGES.userCreated);
@@ -47,10 +32,7 @@ test.describe.serial('AutomationExercise API List Scenarios', () => {
   test('API 14: GET user account detail by email', async ({ request }) => {
     expect(lifecycleEmail).toBeTruthy();
 
-    const getDetailResponse = await request.get(API_ENDPOINTS.getUserDetailByEmail, {
-      params: { email: lifecycleEmail }
-    });
-    const getDetailBody = await parseApiResponse(getDetailResponse);
+    const getDetailBody = await getUserDetailByEmail(request, lifecycleEmail);
 
     expect(getDetailBody.responseCode).toBe(API_RESPONSE_CODES.success);
     expect(getDetailBody.user).toBeTruthy();
@@ -62,15 +44,10 @@ test.describe.serial('AutomationExercise API List Scenarios', () => {
 
     const updatedPayload = {
       ...lifecyclePayload,
-      name: 'API Test User Updated',
-      city: 'Ottawa'
+      ...ACCOUNT_API_DATA.update
     };
 
-    const updateResponse = await request.fetch(API_ENDPOINTS.updateAccount, {
-      method: 'PUT',
-      form: updatedPayload
-    });
-    const updateBody = await parseApiResponse(updateResponse);
+    const updateBody = await updateAccount(request, updatedPayload);
 
     expect(updateBody.responseCode).toBe(API_RESPONSE_CODES.success);
     expect(updateBody.message).toBe(API_RESPONSE_MESSAGES.userUpdated);
@@ -79,14 +56,7 @@ test.describe.serial('AutomationExercise API List Scenarios', () => {
   test('API 12: DELETE user account', async ({ request }) => {
     expect(lifecycleEmail).toBeTruthy();
 
-    const deleteResponse = await request.fetch(API_ENDPOINTS.deleteAccount, {
-      method: 'DELETE',
-      form: {
-        email: lifecycleEmail,
-        password: lifecyclePassword
-      }
-    });
-    const deleteBody = await parseApiResponse(deleteResponse);
+    const deleteBody = await deleteAccount(request, lifecycleEmail, lifecyclePassword);
 
     expect(deleteBody.responseCode).toBe(API_RESPONSE_CODES.success);
     expect(deleteBody.message).toBe(API_RESPONSE_MESSAGES.accountDeleted);
