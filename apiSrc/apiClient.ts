@@ -32,3 +32,33 @@ export async function searchProducts(
 
   return parseApiResponse(response);
 }
+
+export async function verifyLogin(
+  request: APIRequestContext,
+  credentials: { email: string; password: string }
+): Promise<ApiResponseBody> {
+  const response = await request.post(API_ENDPOINTS.verifyLogin, {
+    form: credentials
+  });
+
+  return parseApiResponse(response);
+}
+
+export async function verifyLoginWithoutEmail(
+  request: APIRequestContext,
+  password: string
+): Promise<ApiResponseBody> {
+  const response = await request.post(API_ENDPOINTS.verifyLogin, {
+    form: { password }
+  });
+
+  return parseApiResponse(response);
+}
+
+export async function deleteVerifyLogin(request: APIRequestContext): Promise<ApiResponseBody> {
+  const response = await request.fetch(API_ENDPOINTS.verifyLogin, {
+    method: 'DELETE'
+  });
+
+  return parseApiResponse(response);
+}
