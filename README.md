@@ -15,19 +15,21 @@ Toronto, Canada
 whitehornmatthew@gmail.com  
 +1 647-546-7728  
 
-I’m passionate about building tools that remove repetitive work, strengthen reliability, and streamline operations.  
-This showcase serves as a practical demonstration of how I approach automation engineering in real environments.
+I specialize in designing and building automated testing and workflow systems that improve software reliability and reduce manual effort. My core strengths include end-to-end test automation, framework design, and creating scalable, maintainable QA solutions.
 
-If you're hiring for automation, QA, or development roles — I’d love to chat.
+I work primarily with TypeScript, JavaScript, Node.js, and Playwright, with a strong focus on clean architecture, reusable components, and practical engineering patterns used in production environments.
 
+My approach combines software engineering principles with QA discipline to build automation systems that are robust, efficient, and easy to extend.
 ---
 
-## Technologies & Skills
+## Core Competencies
+Leadership & Collaboration: Team leadership, mentorship, stakeholder communication, cross-functional collaboration, and driving quality initiatives within agile environments
+Testing Tools & Frameworks: Cypress, Playwright, Cucumber, Postman, Selenium (familiar), Jest
+Programming & Scripting: JavaScript, TypeScript, SQL, C#, Gherkin
+DevOps & CI/CD: Azure DevOps, GitHub, Git, AWS, CodeBuild
+Project & Issue Management: Jira, Confluence, TestRail, X-Ray
+Testing Types: Automation, End-to-End, API, Integration, Regression, Exploratory, Manual, Smoke, Security, Non-functional, FAT, SAT
 
-- **Languages:** TypeScript, JavaScript  
-- **Automation & Scripting:** Node.js, file processing, API integration  
-- **Testing:** Jest / Mocha (or whatever you use)  
-- **Tools & Practices:** Git, modular architecture, test-driven development, CI/CD readiness
 
 ## Purpose of This Repository
 
@@ -49,16 +51,13 @@ This project is intentionally built as a **technical portfolio** to show:
 - **Clear project architecture** reflecting real engineering practices  
 - A foundation that can be extended to CI pipelines, API workflows, scraping tasks, etc.
 
-This repo will continue to grow with additional modules as I expand my automation toolkit.
-
 ---
 
 ## Project Structure
 /data         — sample datasets, inputs, and assets used by automation scripts
-/pages        — generated outputs, reports, or demo pages created by scripts
-/scripts      — core automation scripts, modularized by purpose or workflow
-/tests        — test suites validating script functionality and reliability
-/config       — configuration files, environment variables, or templates
+/pages        — Page Object Model approach to testing
+/tests        — test suites 
+/config       — configuration files, environment variables
 package.json  — Node.js dependencies, scripts, and build/test commands
 README.md     — this documentation file
 .gitignore    — files and folders to ignore in Git
